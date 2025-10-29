@@ -32,6 +32,7 @@ Pastikan di projek semua sudah terinstall dan versi sama seperti dibawah, gunaka
 * Laravel framework 12.35.1
 * Composer 2.8.4
 * MySQL 8.4.3
+* Vite 7.1.12
 * Git Versi Terbaru
 
 
