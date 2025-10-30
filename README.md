@@ -1,9 +1,9 @@
 # Website CineFlick 
-Repository sistem booking bioskop berbasis website. Repository ini digunakan untuk kolaborasi kode **projek tugas kelompok UAS** mata kuliah **Sistem Basis Data** dan **Pemrograman Web**.<br>
+Repository sistem booking bioskop berbasis website. Repository ini digunakan untuk kolaborasi kode **Proyek tugas kelompok UAS** mata kuliah **Sistem Basis Data** dan **Pemrograman Web**.<br>
 
-Projek dibuat oleh **Kelompok 2**.<br>
+Proyek dibuat oleh **Kelompok 2**.<br>
 
-Sebelum mengerjakan projek, tolong selalu baca file "README.md" dan "CONTRIBUTING.md".
+Sebelum mengerjakan proyek, tolong selalu baca file "README.md" dan "CONTRIBUTING.md".
 
 Jangan mengubah/menghapus file "README.md" dan "CONTRIBUTING.md" tanpa izin ketua.
 
@@ -23,9 +23,8 @@ Anggota Kelompok:
 13. Shenry Charissa (3337240080), Laporan & Presentasi.
 14. Gallenina Mahsashera Widodo (3337240099), Laporan & Presentasi.
 
-
-## Dependensi dan Versi yang Digunakan Projek
-Pastikan di projek semua sudah terinstall dan versi sama seperti dibawah, gunakan terminal di laragon untuk mengecek:
+## Dependensi dan Versi yang Digunakan proyek
+Pastikan di proyek semua sudah terinstall dan versi sama seperti dibawah, gunakan terminal di laragon untuk mengecek:
 * PHP 8.3.26
 * Node.js 22.12.0
 * npm 10.9.0
@@ -34,7 +33,6 @@ Pastikan di projek semua sudah terinstall dan versi sama seperti dibawah, gunaka
 * MySQL 8.4.3
 * Vite 7.1.12
 * Git Versi Terbaru
-
 
 ## Tahap Instalasi
 Pastikan ikut setiap tahap ini untuk menginstall project ke sistem anda, gunakan terminal di laragon:
@@ -62,10 +60,10 @@ npm run dev
 php artisan serve
 ```
 
-
 ## Catatan
-Berikut adalah catatan yang bisa dicek untuk informasi lebih lanjut dari projek:
-1. Pastikan file ".env" tidak diupload (Cek di isi file ".gitignore" di folder awal projek dengan tulisan ".env, pastikan ada tulisannya) karena ada key yang gak boleh dishare, untuk file ".env.example" boleh diupload karena hanya contoh yang tidak ada key.
+Berikut adalah catatan yang bisa dicek untuk informasi lebih lanjut dari proyek:
+
+1. Pastikan file ".env" tidak diupload (Cek di isi file ".gitignore" di folder awal proyek dengan tulisan ".env, pastikan ada tulisannya) karena ada key yang gak boleh dishare, untuk file ".env.example" boleh diupload karena hanya contoh yang tidak ada key.
 
 2. Gunakan Laragon untuk menghost website secara lokal.
 
@@ -75,9 +73,8 @@ Berikut adalah catatan yang bisa dicek untuk informasi lebih lanjut dari projek:
 
 5. Frontend menggunakan npm (Vite) dan backend menggunakan composer (Laravel).
 
-
 ## Kontak
 Mohon maaf jika ada kesalahan atau kekurangan. Jika ada yang perlu dikoreksi atau ditambah di file "README.md" dan "CONTRIBUTING.md" tolong berikan info melalui WA ketua.
 
 ## Tambahan
-Terima kasih kepada semua anggota yang telah berkontribusi. Semoga projek dapat dikerjakan dengan baik, amin.
+Terima kasih kepada semua anggota yang telah berkontribusi. Semoga proyek dapat dikerjakan dengan baik, amin.
