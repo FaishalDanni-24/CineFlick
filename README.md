@@ -61,8 +61,9 @@ php artisan serve
 ```
 6. Install Laravel Breeze dan setup mail
 ```bash
-composer require laravel/breeze --dev
-php artisan breeze:install
+# Menginstal dependensi baru
+composer install
+npm install
 # jika ditanya stack breeze, tulis 'blade' tanpa tanda kutip
 # jika ditanya dark mode support, tulis 'yes' tanpa tanda kutip
 # jika ditanya testing framework, pilih pencet enter atau tulis 'pest'tanpa tanda kutip
