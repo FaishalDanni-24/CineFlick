@@ -50,6 +50,35 @@ php artisan migrate
 npm run dev
 php artisan serve
 ```
+6. Install Laravel Breeze dan setup mail
+```bash
+composer require laravel/breeze --dev
+php artisan breeze:install
+# jika ditanya stack breeze, tulis 'blade' tanpa tanda kutip
+# jika ditanya dark mode support, tulis 'yes' tanpa tanda kutip
+# jika ditanya testing framework, pilih pencet enter atau tulis 'pest'tanpa tanda kutip
+php artisan migrate # Jika sudah ada pesan nothing to migrate, berarti sudah pernah menjalankan php artisan migrate
+```
+Tahap selanjutnya diperlukan untuk fitur email seperti (Recovery dari Forgot Password).<br>
+**Pastikan Mailpit di laragon sudah jalan.**<br>
+Setelah instalasi, pastikan config di ".env" anda dengan nilai berikut:
+```txt
+MAIL_MAILER=smtp
+MAIL_SCHEME=null
+MAIL_HOST=localhost # 127.0.0.1
+MAIL_PORT=1025 # Sesuaikan dengan port yang ditampilkan di laragon
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_FROM_ADDRESS="cineflick@testmail.com"
+MAIL_FROM_NAME="${APP_NAME}"
+```
+Lalu jalankan kode ini di terminal laragon, untuk membersihkan cache:
+```bash
+php artisan config:clear
+php artisan cache:clear
+php artisan route:clear
+php artisan view:clear
+```
 
 ## Struktur Folder Proyek dan Tempat Bekerja
 * 'app/': Logika backend (controller, model)
@@ -94,7 +123,7 @@ git push origin nama_branch
 * Gunakan komentar di setiap fungsi dan logika penting.
 * Gunakan nama variabel yang mudah dipahami dan jelas (Contoh: movie_list).
 * **Jangan** ubah main branch langsung, gunakan branch fitur.
-* Satu fitur = satu branch.
+* Satu fitur = satu branch = satu orang.
 * Sebelum migrasi besar simpan backup database.
 * Pastikan website bisa berjalan tanpa error menggunakan 'php artisan serve' sebelum push.
 

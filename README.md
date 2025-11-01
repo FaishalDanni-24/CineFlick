@@ -59,7 +59,7 @@ php artisan migrate
 npm run dev
 php artisan serve
 ```
-6. Install Laravel Breeze
+6. Install Laravel Breeze dan setup mail
 ```bash
 composer require laravel/breeze --dev
 php artisan breeze:install
@@ -89,19 +89,15 @@ php artisan route:clear
 php artisan view:clear
 ```
 
-
 ## Catatan
 Berikut adalah catatan yang bisa dicek untuk informasi lebih lanjut dari proyek:
 
 1. Pastikan file ".env" tidak diupload (Cek di isi file ".gitignore" di folder awal proyek dengan tulisan ".env, pastikan ada tulisannya) karena ada key yang gak boleh dishare, untuk file ".env.example" boleh diupload karena hanya contoh yang tidak ada key.
-
 2. Gunakan Laragon untuk menghost website secara lokal.
-
 3. Database MySQL yang digunakan tidak sama setiap sistem individu.
-
 4. Jalankan perintah 'npm run dev dan php artisan serve' untuk menjalankan website.
-
 5. Frontend menggunakan npm (Vite) dan backend menggunakan composer (Laravel).
+6. **Mailpit** digunakan untuk testing sistem pengiriman email secara lokal, untuk mengaksesnya gunakan **'localhost:8025'**. Fitur akan disesuaikan di waktu mendatang.
 
 ## Kontak
 Mohon maaf jika ada kesalahan atau kekurangan. Jika ada yang perlu dikoreksi atau ditambah di file "README.md" dan "CONTRIBUTING.md" tolong berikan info melalui WA ketua.
