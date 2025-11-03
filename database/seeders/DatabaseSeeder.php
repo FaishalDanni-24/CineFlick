@@ -17,9 +17,17 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        /*User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+        ]);
+        */
+
+        // Memanggil file seeder yang digunakan untuk membuat nilai default/awal
+        $this->call([
+            // Masukan seeder yang dipanggil
+            AdminSeeder::class,
+            StudioSeeder::class
         ]);
     }
 }

@@ -83,7 +83,8 @@ php artisan optimize:clear
 ## Struktur Folder Proyek dan Tempat Bekerja
 * 'app/': Logika backend (controller, model)
 * 'database/': Struktur tabel dan data awal
-* 'public/build': Folder hasil build frontend **(OTOMATIS)**
+* 'public/build': Folder hasil build frontend **(OTOMATIS, JANGAN DIMODIFIKASI)**
+* 'public/images': Folder untuk menaruh aset gambar statis (Logo website, banner, dll)
 * 'resources/views': Tampilan website (Blade template)
 * 'resources/css': Kode CSS mentah
 * 'resources/js': Kode JS mentah
@@ -91,7 +92,7 @@ php artisan optimize:clear
 * 'routes/auth.php': Rute untuk sistem autentikasi (dari Laravel Breeze)
 
 Backend: 'app/', 'database/', dan 'routes/'<br>
-Frontend: 'resources/views', 'resources/css', 'resources/js'<br>
+Frontend: 'resources/views', 'resources/css', 'resources/js', 'public/images'<br>
 Ketua: Semua folder<br>
 Laporan & Presentasi: 'README.md' dan 'CONTRIBUTING.md'<br>
 

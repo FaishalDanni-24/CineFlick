@@ -98,6 +98,14 @@ Berikut adalah catatan yang bisa dicek untuk informasi lebih lanjut dari proyek:
 4. Jalankan perintah 'npm run dev dan php artisan serve' untuk menjalankan website.
 5. Frontend menggunakan npm (Vite) dan backend menggunakan composer (Laravel).
 6. **Mailpit** digunakan untuk testing sistem pengiriman email secara lokal, untuk mengaksesnya gunakan **'localhost:8025'**. Fitur akan disesuaikan di waktu mendatang.
+7. Jika ada update database (terutama struktur), jalankan perintah di bawah:
+```bash
+# Membuat ulang database cineflick_db dari nol dan mengisi dengan nilai default dari seeders (Catatan: Session dan user akan hilang!)
+php artisan migrate:fresh --seed
+# Atau jalankan ini jika tidak mau semua data hilang
+php artisan migrate
+php artisan db:seed
+```
 
 ## Kontak
 Mohon maaf jika ada kesalahan atau kekurangan. Jika ada yang perlu dikoreksi atau ditambah di file "README.md" dan "CONTRIBUTING.md" tolong berikan info melalui WA ketua.
