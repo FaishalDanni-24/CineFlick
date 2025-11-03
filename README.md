@@ -61,12 +61,9 @@ php artisan serve
 ```
 6. Install Laravel Breeze dan setup mail
 ```bash
-# Menginstal dependensi baru
+# Menginstall package yang terbaru dari composer dan npm
 composer install
 npm install
-# jika ditanya stack breeze, tulis 'blade' tanpa tanda kutip
-# jika ditanya dark mode support, tulis 'yes' tanpa tanda kutip
-# jika ditanya testing framework, pilih pencet enter atau tulis 'pest'tanpa tanda kutip
 php artisan migrate # Jika sudah ada pesan nothing to migrate, berarti sudah pernah menjalankan php artisan migrate
 ```
 Tahap selanjutnya diperlukan untuk fitur email seperti (Recovery dari Forgot Password).<br>
@@ -88,6 +85,8 @@ php artisan config:clear
 php artisan cache:clear
 php artisan route:clear
 php artisan view:clear
+# Atau (Bersihkan semua cache)
+php artisan optimize:clear
 ```
 
 ## Catatan

@@ -52,11 +52,9 @@ php artisan serve
 ```
 6. Install Laravel Breeze dan setup mail
 ```bash
+# Menginstall package yang terbaru dari composer dan npm
 composer install
 npm install
-# jika ditanya stack breeze, tulis 'blade' tanpa tanda kutip
-# jika ditanya dark mode support, tulis 'yes' tanpa tanda kutip
-# jika ditanya testing framework, pilih pencet enter atau tulis 'pest'tanpa tanda kutip
 php artisan migrate # Jika sudah ada pesan nothing to migrate, berarti sudah pernah menjalankan php artisan migrate
 ```
 Tahap selanjutnya diperlukan untuk fitur email seperti (Recovery dari Forgot Password).<br>
@@ -78,6 +76,8 @@ php artisan config:clear
 php artisan cache:clear
 php artisan route:clear
 php artisan view:clear
+# Atau (Bersihkan semua cache)
+php artisan optimize:clear
 ```
 
 ## Struktur Folder Proyek dan Tempat Bekerja
@@ -88,44 +88,41 @@ php artisan view:clear
 * 'resources/css': Kode CSS mentah
 * 'resources/js': Kode JS mentah
 * 'routes/web.php': Rute URL website
+* 'routes/auth.php': Rute untuk sistem autentikasi (dari Laravel Breeze)
 
 Backend: 'app/', 'database/', dan 'routes/'<br>
 Frontend: 'resources/views', 'resources/css', 'resources/js'<br>
 Ketua: Semua folder<br>
 Laporan & Presentasi: 'README.md' dan 'CONTRIBUTING.md'<br>
 
-Jangan mengubah file atau folder lain tanpa diskusi.
+Jangan mengubah atau menambah file atau folder lain tanpa diskusi.
 
 ## Cara Kontribusi (Tambah/Edit Fitur)
 1. Pastikan proyek lokal anda sudah versi terbaru:
 ```bash
 git pull origin main
 ```
-
 2. Buat branch baru untuk fitur yang ingin dikerjakan:
 ```bash
 git checkout -b nama_branch
 # Contoh git checkout -b homepage_user
 ```
-
 3. Kerjakan kode di branch tersebut.
-
 4. Setelah selesai:
 ```bash
 git add .
 git commit -m "Sesuaikan isi pesan dengan yang dikerjakan"
 git push origin nama_branch
 ```
-
 5. Buka Github, buat Pull Request (PR) ke main. Yang nanti akan direview dan digabungkan jika sudah benar.
 
 ## Aturan Penulisan Kode
 * Gunakan komentar di setiap fungsi dan logika penting.
 * Gunakan nama variabel yang mudah dipahami dan jelas (Contoh: movie_list).
-* **Jangan** ubah main branch langsung, gunakan branch fitur.
+* **Jangan** ubah branch main langsung, kerjakan di branch fitur.
 * Satu fitur = satu branch = satu orang.
 * Sebelum migrasi besar simpan backup database.
-* Pastikan website bisa berjalan tanpa error menggunakan 'php artisan serve' sebelum push.
+* Pastikan website bisa berjalan tanpa error menggunakan 'npm run dev dan php artisan serve' sebelum push.
 
 ## Sinkronisasi Harian
 Sebelum mulai koding:
