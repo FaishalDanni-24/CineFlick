@@ -64,9 +64,9 @@ php artisan serve
 # Menginstall package yang terbaru dari composer dan npm
 composer install
 npm install
-php artisan migrate # Jika sudah ada pesan nothing to migrate, berarti sudah pernah menjalankan php artisan migrate
+php artisan migrate # Jika sudah ada pesan nothing to migrate, berarti tidak ada tabel baru
 ```
-Tahap selanjutnya diperlukan untuk fitur email seperti (Recovery dari Forgot Password).<br>
+Tahap selanjutnya diperlukan untuk fitur email seperti (Recovery dari Forgot Password, Verifikasi Email, dll).<br>
 **Pastikan Mailpit di laragon sudah jalan.**<br>
 Setelah instalasi, pastikan config di ".env" anda dengan nilai berikut:
 ```txt
@@ -87,6 +87,10 @@ php artisan route:clear
 php artisan view:clear
 # Atau (Bersihkan semua cache)
 php artisan optimize:clear
+```
+7. Membuat symbolic link folder 'storage/app/public'
+```bash
+php artisan storage:link
 ```
 
 ## Catatan

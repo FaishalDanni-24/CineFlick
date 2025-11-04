@@ -55,9 +55,9 @@ php artisan serve
 # Menginstall package yang terbaru dari composer dan npm
 composer install
 npm install
-php artisan migrate # Jika sudah ada pesan nothing to migrate, berarti sudah pernah menjalankan php artisan migrate
+php artisan migrate # Jika sudah ada pesan nothing to migrate, berarti tidak ada tabel baru
 ```
-Tahap selanjutnya diperlukan untuk fitur email seperti (Recovery dari Forgot Password).<br>
+Tahap selanjutnya diperlukan untuk fitur email seperti (Recovery dari Forgot Password, Verifikasi Email, dll).<br>
 **Pastikan Mailpit di laragon sudah jalan.**<br>
 Setelah instalasi, pastikan config di ".env" anda dengan nilai berikut:
 ```txt
@@ -79,24 +79,31 @@ php artisan view:clear
 # Atau (Bersihkan semua cache)
 php artisan optimize:clear
 ```
+7. Membuat symbolic link folder 'storage/app/public' ke 'public/'
+```bash
+php artisan storage:link
+```
 
 ## Struktur Folder Proyek dan Tempat Bekerja
 * 'app/': Logika backend (controller, model)
 * 'database/': Struktur tabel dan data awal
 * 'public/build': Folder hasil build frontend **(OTOMATIS, JANGAN DIMODIFIKASI)**
-* 'public/images': Folder untuk menaruh aset gambar statis (Logo website, banner, dll)
+* 'public/images': Folder untuk menaruh aset gambar statis/jarang diubah (Logo website, banner, dll)
 * 'resources/views': Tampilan website (Blade template)
 * 'resources/css': Kode CSS mentah
 * 'resources/js': Kode JS mentah
 * 'routes/web.php': Rute URL website
 * 'routes/auth.php': Rute untuk sistem autentikasi (dari Laravel Breeze)
+* 'storage/app/public': Folder tempat menyimpan file yang diunggah user dan dapat diakses publik (Contoh: Foto profile user)
+* 'storage/app/private': Folder tempat menyimpan file yang diunggah user dan tidak boleh diakses publik (Contoh: Bukti payment)
 
 Backend: 'app/', 'database/', dan 'routes/'<br>
-Frontend: 'resources/views', 'resources/css', 'resources/js', 'public/images'<br>
+Frontend: 'resources/views', 'resources/css', 'resources/js', dan 'public/images'<br>
 Ketua: Semua folder<br>
 Laporan & Presentasi: 'README.md' dan 'CONTRIBUTING.md'<br>
 
-Jangan mengubah atau menambah file atau folder lain tanpa diskusi.
+Jangan mengubah atau menambah file atau folder lain tanpa diskusi ke anggota/tim yang berkaitan.<br>
+Folder 'storage/app' digunakan untuk menyimpan hasil unggahan dari user melalui form input html tipe file.<br>
 
 ## Cara Kontribusi (Tambah/Edit Fitur)
 1. Pastikan proyek lokal anda sudah versi terbaru:
