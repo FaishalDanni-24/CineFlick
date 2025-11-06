@@ -27,7 +27,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // Masukan seeder yang dipanggil
             AdminSeeder::class,
-            StudioSeeder::class
+            StudioSeeder::class,
+            FilmSeeder::class
         ]);
     }
 }
