@@ -13,16 +13,30 @@ class FilmSeeder extends Seeder
      */
     public function run(): void
     {
-        // Buat data fake film (untuk testing)
+        /**
+         * Buat data fake film (untuk testing)
+         * Pastikan user_id menunjuk ke user dengan role admin di tabel users.
+         */
         DB::table('films')->upsert([
             [
                 'title' => 'Jalan Malam Kenangan',
                 'publisher' => 'Budi Cahya Studio',
                 'duration_mins' => 120,
-                'sinopsis' => 'Placeholder_Sinopsis',
+                'sinopsis' => 'Placeholder_Sinopsis_Drama',
                 'normal_price' => 30000.00,
                 'poster_link' => '/storage/poster/fake_film1.png',
-                'user_id' => 1, // Pada logika backend, pastikan role dari user_id adalah admin
+                'user_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'title' => 'Mr Thinker',
+                'publisher' => 'Broken Arrow Studio',
+                'duration_mins' => 160,
+                'sinopsis' => 'Placeholder_Sinopsis_Biography',
+                'normal_price' => 45000.00,
+                'poster_link' => '/storage/poster/fake_film2.png',
+                'user_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -30,10 +44,10 @@ class FilmSeeder extends Seeder
                 'title' => 'The Third One',
                 'publisher' => 'Beyond Dreams',
                 'duration_mins' => 110,
-                'sinopsis' => 'Placeholder_Sinopsis',
+                'sinopsis' => 'Placeholder_Sinopsis_Adventure',
                 'normal_price' => 40000.00,
-                'poster_link' => '/storage/poster/fake_film2.png',
-                'user_id' => 1, // Pada logika backend, pastikan role dari user_id adalah admin
+                'poster_link' => '/storage/poster/fake_film3.png',
+                'user_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ]

@@ -28,7 +28,8 @@ class DatabaseSeeder extends Seeder
             // Masukan seeder yang dipanggil
             AdminSeeder::class,
             StudioSeeder::class,
-            FilmSeeder::class
+            FilmSeeder::class,
+            ShowtimeSeeder::class
         ]);
     }
 }

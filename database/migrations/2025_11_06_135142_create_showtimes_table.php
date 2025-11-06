@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Buat tabel films
-        Schema::create('films', function (Blueprint $table) {
+        // Buat tabel showtimes
+        Schema::create('showtimes', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('publisher');
-            $table->integer('duration_mins');
-            $table->text('sinopsis');
-            $table->decimal('normal_price', 10, 2);
-            $table->string('poster_link')->nullable();
+            $table->date('show_date');
+            $table->time('start_time');
+            $table->time('end_time');
+            $table->foreignId('film_id')->constrained()->onDelete('cascade');
+            $table->foreignId('studio_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('films');
+        Schema::dropIfExists('showtimes');
     }
 };
