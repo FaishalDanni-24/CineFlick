@@ -15,12 +15,12 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->decimal('ticket_price'); // Harga per tiket
-            $table->string('qr_code')->nullable(); // Link ke kode QR
+            $table->string('qr_code_path')->nullable(); // Link ke kode QR, boleh kosong
             $table->foreignId('booking_id')->constrained()->onDelete('cascade');
             $table->foreignId('seat_id')->constrained()->onDelete('cascade');
             $table->timestamps();
 
-            $table->unique(['booking_id','seat_id']); // Gabungan booking_id dan seat_id harus unik
+            $table->unique(['booking_id','seat_id']); // Gabungan kolom ini harus unik
         });
     }
 

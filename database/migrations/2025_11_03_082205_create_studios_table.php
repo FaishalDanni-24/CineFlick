@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('studios', function (Blueprint $table) {
             // Buat kolom pada tabel studios
             $table->id();
-            $table->string('name_studio')->unique();
-            $table->integer('capacity');
+            $table->string('studio_name')->unique(); // Nama studio harus unik
+            $table->integer('seat_capacity');
             $table->timestamps();
         });
     }

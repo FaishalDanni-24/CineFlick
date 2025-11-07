@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('food_drink_id')->constrained()->onDelete('cascade');
             $table->timestamps();
 
-            $table->unique(['booking_id', 'food_drink_id']); // Gabungan booking_id dan food_drink_id harus unik
+            $table->unique(['booking_id', 'food_drink_id']); // Gabungan kolom ini harus unik
         });
     }
 

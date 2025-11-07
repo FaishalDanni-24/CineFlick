@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('studio_id')->constrained()->onDelete('cascade');
             $table->timestamps();
 
-            $table->unique(['seat_row', 'seat_number', 'studio_id']);
+            $table->unique(['seat_row', 'seat_number', 'studio_id']); // Gabungan kolom ini harus unik
         });
     }
 

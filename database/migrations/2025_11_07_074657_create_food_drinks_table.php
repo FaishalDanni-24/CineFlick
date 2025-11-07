@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name')->unique(); // Nama makanan/minuman harus unik
             $table->enum('type', ['food','drink']);
             $table->decimal('price', 10, 2); // Harga per makanan/minuman
-            $table->string('imagepath')->nullable(); // Link gambar makanan/minuman
+            $table->string('image_path')->nullable(); // Link gambar makanan/minuman
             $table->timestamps();
         });
     }

@@ -17,13 +17,11 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->decimal('total_price', 10, 2); // Total harga dari tiket + makanan dan minuman
-            $table->datetimes('booking_date'); // Waktu dan tanggal pemesanan
+            $table->datetime('booking_date'); // Waktu dan tanggal pemesanan
             $table->enum('status', ['pending', 'paid', 'cancelled'])->default('pending');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('showtime_id')->constrained()->onDelete('cascade');
             $table->timestamps();
-
-            $table->unique(['user_id', 'showtime_id']); // Gabungan user_id dan showtime_id harus unik
         });
     }
 
