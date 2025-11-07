@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // Masukan seeder yang dipanggil
             AdminSeeder::class,
+            UserSeeder::class,
             StudioSeeder::class,
             FilmSeeder::class,
             ShowtimeSeeder::class,

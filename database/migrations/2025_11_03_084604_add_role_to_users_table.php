@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             // Buat kolom role ke tabel users jika menjalankan php artisan migrate
-            $table->enum('role', ['admin','user'])->default('user');
+            $table->enum('role', ['admin','customer'])->default('customer');
         });
     }
 
