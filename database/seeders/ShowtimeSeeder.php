@@ -80,7 +80,7 @@ class ShowtimeSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now()
             ],
-        ], ['id'], 
+        ], ['show_date', 'start_time', 'end_time', 'film_id', 'studio_id'], 
         ['show_date', 'start_time', 'end_time', 'film_id', 'studio_id', 'user_id', 'updated_at']);
     }
 }

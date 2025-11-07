@@ -16,12 +16,15 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('publisher');
+            $table->integer('year');
             $table->integer('duration_mins');
             $table->text('sinopsis');
             $table->decimal('normal_price', 10, 2);
             $table->string('poster_link')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+
+            $table->unique(['title', 'publisher', 'year']);
         });
     }
 

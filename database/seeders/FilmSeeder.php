@@ -21,6 +21,7 @@ class FilmSeeder extends Seeder
             [
                 'title' => 'Jalan Malam Kenangan',
                 'publisher' => 'Budi Cahya Studio',
+                'year' => 2025,
                 'duration_mins' => 120,
                 'sinopsis' => 'Placeholder_Sinopsis_Drama',
                 'normal_price' => 30000.00,
@@ -32,6 +33,7 @@ class FilmSeeder extends Seeder
             [
                 'title' => 'Mr Thinker',
                 'publisher' => 'Broken Arrow Studio',
+                'year' => 2025,
                 'duration_mins' => 160,
                 'sinopsis' => 'Placeholder_Sinopsis_Biography',
                 'normal_price' => 45000.00,
@@ -43,6 +45,7 @@ class FilmSeeder extends Seeder
             [
                 'title' => 'The Third One',
                 'publisher' => 'Beyond Dreams',
+                'year' => 2025,
                 'duration_mins' => 110,
                 'sinopsis' => 'Placeholder_Sinopsis_Adventure',
                 'normal_price' => 40000.00,
@@ -51,7 +54,7 @@ class FilmSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now()
             ]
-        ], ['id'], 
+        ], ['title', 'publisher', 'year'], 
         ['title', 'publisher', 'duration_mins', 'sinopsis', 'normal_price', 'poster_link' ,'user_id', 'updated_at']);
     }
 }

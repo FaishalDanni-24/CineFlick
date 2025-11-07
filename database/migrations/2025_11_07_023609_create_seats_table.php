@@ -11,18 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Buat tabel showtimes
-        Schema::create('showtimes', function (Blueprint $table) {
+        Schema::create('seats', function (Blueprint $table) {
             $table->id();
-            $table->date('show_date');
-            $table->time('start_time');
-            $table->time('end_time');
-            $table->foreignId('film_id')->constrained()->onDelete('cascade');
+            $table->char('seat_row');
+            $table->integer('seat_number');
             $table->foreignId('studio_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
 
-            $table->unique(['show_date', 'start_time', 'end_time', 'film_id', 'studio_id']);
+            $table->unique(['seat_row', 'seat_number', 'studio_id']);
         });
     }
 
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('showtimes');
+        Schema::dropIfExists('seats');
     }
 };

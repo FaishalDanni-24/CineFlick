@@ -29,7 +29,8 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             StudioSeeder::class,
             FilmSeeder::class,
-            ShowtimeSeeder::class
+            ShowtimeSeeder::class,
+            SeatSeeder::class
         ]);
     }
 }
