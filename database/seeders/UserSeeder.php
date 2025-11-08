@@ -40,6 +40,6 @@ class UserSeeder extends Seeder
                 'gender' => 'perempuan'
             ],
         ],['email'],
-        ['name', 'email_verified_at', 'password', 'remember_token', 'created_at', 'updated_at', 'role']);
+        ['name', 'email', 'password', 'remember_token', 'updated_at', 'role', 'gender']);
     }
 }

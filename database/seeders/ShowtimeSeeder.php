@@ -21,7 +21,7 @@ class ShowtimeSeeder extends Seeder
          */
         DB::table('showtimes')->upsert([
             [
-                'show_date' => '2025-12-01',
+                'show_date' => now(),
                 'start_time' => '12:00:00',
                 'end_time' => '14:00:00',
                 'normal_price' => 35000.00,
@@ -32,7 +32,7 @@ class ShowtimeSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'show_date' => '2025-12-01',
+                'show_date' => now(),
                 'start_time' => '14:10:00',
                 'end_time' => '16:00:00',
                 'normal_price' => 30000.00,
@@ -43,7 +43,7 @@ class ShowtimeSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'show_date' => '2025-12-01',
+                'show_date' => now(),
                 'start_time' => '16:10:00',
                 'end_time' => '18:50:00',
                 'normal_price' => 40000.00,
@@ -54,7 +54,7 @@ class ShowtimeSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'show_date' => '2025-12-01',
+                'show_date' => now(),
                 'start_time' => '12:00:00',
                 'end_time' => '14:00:00',
                 'normal_price' => 35000.00,
@@ -65,7 +65,7 @@ class ShowtimeSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'show_date' => '2025-12-01',
+                'show_date' => now(),
                 'start_time' => '14:10:00',
                 'end_time' => '16:00:00',
                 'normal_price' => 30000.00,
@@ -76,7 +76,7 @@ class ShowtimeSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'show_date' => '2025-12-01',
+                'show_date' => now(),
                 'start_time' => '16:10:00',
                 'end_time' => '18:50:00',
                 'normal_price' => 40000.00,

@@ -27,7 +27,7 @@ class FilmSeeder extends Seeder
                 'sinopsis' => 'Placeholder_Sinopsis_Biography',
                 'rating' => 8.2,
                 'poster_path' => '/storage/poster/fake_film1.png',
-                'user_id' => 1,
+                'user_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -53,7 +53,7 @@ class FilmSeeder extends Seeder
                 'sinopsis' => 'Placeholder_Sinopsis_Adventure',
                 'rating' => 7.0,
                 'poster_path' => '/storage/poster/fake_film3.png',
-                'user_id' => 1,
+                'user_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now()
             ]

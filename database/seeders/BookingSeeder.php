@@ -16,8 +16,7 @@ class BookingSeeder extends Seeder
         /* Buat data default untuk tabel bookings (untuk testing)
          * total_price = jumlah tiket + jumlah makanan/minuman
          */
-        DB::table('bookings')->upsert([
-            [
+        $booking_seed = [[
                 'total_price' => (35000.00+35000.00),
                 'booking_date' => now(),
                 'status' => 'pending',
@@ -44,7 +43,38 @@ class BookingSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now()
             ]
-        ],['total_price', 'booking_date', 'status', 'user_id', 'showtime_id'],
-        ['total_price', 'booking_date', 'status', 'user_id', 'showtime_id', 'updated_at']);
+        ];
+
+        foreach($booking_seed as $data){
+            // Nilai $existing hanya untuk proses seeder, bukan logika backend
+            $existing = DB::table('bookings')
+                        ->where('user_id', $data['user_id'])
+                        ->where('showtime_id', $data['showtime_id'])
+                        ->first();
+
+            if($existing){
+                DB::table('bookings')->where('id', $existing->id)
+                ->update([
+                    'total_price' => $data['total_price'],
+                    'booking_date' => $data['booking_date'],
+                    'status' => $data['status'],
+                    'user_id' => $data['user_id'],
+                    'showtime_id' => $data['showtime_id'],
+                    'updated_at' => $data['updated_at']
+                ]);
+            }
+            else{
+                DB::table('bookings')
+                ->insert([
+                    'total_price' => $data['total_price'],
+                    'booking_date' => $data['booking_date'],
+                    'status' => $data['status'],
+                    'user_id' => $data['user_id'],
+                    'showtime_id' => $data['showtime_id'],
+                    'created_at' => $data['created_at'],
+                    'updated_at' => $data['updated_at']
+                ]);
+            }
+        }
     }
 }

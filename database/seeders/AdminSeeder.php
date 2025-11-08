@@ -19,27 +19,27 @@ class AdminSeeder extends Seeder
         DB::table('users')->upsert([
             [
                 'name' => 'Administrator 1',
-                'email' => 'admin1@mail.com',
+                'email' => 'admin1@cineflick.com',
                 'email_verified_at' => now(), // User otomatis diverified
                 'password' => Hash::make('admin123'), // Hanya untuk pengembangan saja
                 'remember_token' => Str::random(60),
                 'created_at' => now(),
                 'updated_at' => now(),
-                'role' => 'customer', // Berikan user role customer
+                'role' => 'admin', // Berikan user role admin
                 'gender' => 'laki-laki'
             ],
             [
                 'name' => 'Administrator 2',
-                'email' => 'admin2@mail.com',
+                'email' => 'admin2@cineflick.com',
                 'email_verified_at' => now(), // User otomatis diverified
                 'password' => Hash::make('admin123'), // Hanya untuk pengembangan saja
                 'remember_token' => Str::random(60),
                 'created_at' => now(),
                 'updated_at' => now(),
-                'role' => 'customer', // Berikan user role customer
+                'role' => 'admin', // Berikan user role admin
                 'gender' => 'perempuan'
             ],
         ],['email'],
-        []);
+        ['name', 'email', 'password', 'remember_token', 'updated_at', 'role', 'gender']);
     }
 }
