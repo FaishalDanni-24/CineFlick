@@ -25,7 +25,8 @@ class UserSeeder extends Seeder
                 'remember_token' => Str::random(60),
                 'created_at' => now(),
                 'updated_at' => now(),
-                'role' => 'customer' // Berikan user role customer
+                'role' => 'customer', // Berikan user role customer
+                'gender' => 'laki-laki'
             ],
             [
                 'name' => 'User 2',
@@ -35,7 +36,8 @@ class UserSeeder extends Seeder
                 'remember_token' => Str::random(60),
                 'created_at' => now(),
                 'updated_at' => now(),
-                'role' => 'customer' // Berikan user role customer
+                'role' => 'customer', // Berikan user role customer
+                'gender' => 'perempuan'
             ],
         ],['email'],
         ['name', 'email_verified_at', 'password', 'remember_token', 'created_at', 'updated_at', 'role']);

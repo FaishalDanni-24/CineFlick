@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             // Buat kolom gender ke table users jika menjalankan php artisan migrate
-            $table->enum('jenis_kelamin', ['Laki-laki','Perempuan']);
+            $table->enum('gender', ['laki-laki','perempuan']);
         });
     }
 
@@ -24,7 +24,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             // Menghapus kolom gender jika menjalankan php artisan migrate:rollback
-            $table->dropColumn('jenis_kelamin');
+            $table->dropColumn('gender');
         });
     }
 };

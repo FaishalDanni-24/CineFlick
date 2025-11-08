@@ -16,20 +16,30 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         // Buat admin default
-        DB::table('users')->updateOrInsert(
-            // Kondisi untuk cek apakah admin sudah ada (menggunakan email)
-            ['email' => 'admin@cineflick.com'],
-
-            // Nilai yang diupdate atau insert
+        DB::table('users')->upsert([
             [
-                'name' => "Administrator",
-                'email_verified_at' => now(), // Admin otomatis diverified
+                'name' => 'Administrator 1',
+                'email' => 'admin1@mail.com',
+                'email_verified_at' => now(), // User otomatis diverified
                 'password' => Hash::make('admin123'), // Hanya untuk pengembangan saja
                 'remember_token' => Str::random(60),
                 'created_at' => now(),
                 'updated_at' => now(),
-                'role' => 'admin' // Berikan user role admin
-            ]
-        );
+                'role' => 'customer', // Berikan user role customer
+                'gender' => 'laki-laki'
+            ],
+            [
+                'name' => 'Administrator 2',
+                'email' => 'admin2@mail.com',
+                'email_verified_at' => now(), // User otomatis diverified
+                'password' => Hash::make('admin123'), // Hanya untuk pengembangan saja
+                'remember_token' => Str::random(60),
+                'created_at' => now(),
+                'updated_at' => now(),
+                'role' => 'customer', // Berikan user role customer
+                'gender' => 'perempuan'
+            ],
+        ],['email'],
+        []);
     }
 }
