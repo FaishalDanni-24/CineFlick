@@ -25,10 +25,18 @@ class DatabaseSeeder extends Seeder
 
         // Memanggil file seeder yang digunakan untuk membuat nilai default/awal
         $this->call([
-            // Masukan seeder yang dipanggil
+            // Masukan seeder yang dipanggil (Urutan seeder tabel disesuaikan dengan foreign key yang dibutuhkan)
             AdminSeeder::class,
+            UserSeeder::class,
+            FoodDrinkSeeder::class,
             StudioSeeder::class,
-            FilmSeeder::class
+            FilmSeeder::class,
+            SeatSeeder::class,
+            ShowtimeSeeder::class,
+            BookingSeeder::class,
+            BookingFoodDrinkSeeder::class,
+            TicketSeeder::class,
+            PaymentSeeder::class
         ]);
     }
 }

@@ -16,12 +16,16 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('publisher');
+            $table->year('released_year');
+            $table->string('genre');
             $table->integer('duration_mins');
             $table->text('sinopsis');
-            $table->decimal('normal_price', 10, 2);
-            $table->string('poster_link')->nullable();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->decimal('rating', 2, 1);
+            $table->string('poster_path')->nullable(); // Gambar poster bisa kosong
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Pastikan nilai di kolom ini hanya diisi user_id dengan role admin
             $table->timestamps();
+
+            $table->unique(['title', 'publisher', 'released_year']); // Gabungan kolom ini harus unik
         });
     }
 

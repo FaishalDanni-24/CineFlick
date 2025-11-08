@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            // Buat kolom role ke tabel users jika menjalankan php artisan migrate
-            $table->enum('role', ['admin','customer'])->default('customer');
+            // Buat kolom gender ke table users jika menjalankan php artisan migrate
+            $table->enum('gender', ['laki-laki','perempuan']);
         });
     }
 
@@ -22,9 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Jika menjalankan php artisan migrate:rollback maka hapus kolom role
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('role');
+            // Menghapus kolom gender jika menjalankan php artisan migrate:rollback
+            $table->dropColumn('gender');
         });
     }
 };

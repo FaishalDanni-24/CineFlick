@@ -8,35 +8,35 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class AdminSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        // Buat admin default
+       // Buat data user default (untuk testing)
         DB::table('users')->upsert([
             [
-                'name' => 'Administrator 1',
-                'email' => 'admin1@cineflick.com',
+                'name' => 'User 1',
+                'email' => 'user1@mail.com',
                 'email_verified_at' => now(), // User otomatis diverified
-                'password' => Hash::make('admin123'), // Hanya untuk pengembangan saja
+                'password' => Hash::make('12345678'), // Hanya untuk pengembangan saja
                 'remember_token' => Str::random(60),
                 'created_at' => now(),
                 'updated_at' => now(),
-                'role' => 'admin', // Berikan user role admin
+                'role' => 'customer', // Berikan user role customer
                 'gender' => 'laki-laki'
             ],
             [
-                'name' => 'Administrator 2',
-                'email' => 'admin2@cineflick.com',
+                'name' => 'User 2',
+                'email' => 'user2@mail.com',
                 'email_verified_at' => now(), // User otomatis diverified
-                'password' => Hash::make('admin123'), // Hanya untuk pengembangan saja
+                'password' => Hash::make('12345678'), // Hanya untuk pengembangan saja
                 'remember_token' => Str::random(60),
                 'created_at' => now(),
                 'updated_at' => now(),
-                'role' => 'admin', // Berikan user role admin
+                'role' => 'customer', // Berikan user role customer
                 'gender' => 'perempuan'
             ],
         ],['email'],

@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Buat tabel dengan nama studios
-        Schema::create('studios', function (Blueprint $table) {
-            // Buat kolom pada tabel studios
+        Schema::create('seats', function (Blueprint $table) {
             $table->id();
-            $table->string('studio_name')->unique(); // Nama studio harus unik
-            $table->integer('seat_capacity');
+            $table->char('seat_row');
+            $table->integer('seat_number');
+            $table->foreignId('studio_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+
+            $table->unique(['seat_row', 'seat_number', 'studio_id']); // Gabungan kolom ini harus unik
         });
     }
 
@@ -26,7 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Jika menjalankan php artisan migrate:rollback maka hapus tabel studios
-        Schema::dropIfExists('studios');
+        Schema::dropIfExists('seats');
     }
 };

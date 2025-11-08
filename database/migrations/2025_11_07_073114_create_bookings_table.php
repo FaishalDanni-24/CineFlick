@@ -1,0 +1,35 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        /* Buat tabel data bookings
+         * Catatan untuk sekarang user tidak memesan banyak
+         */
+        Schema::create('bookings', function (Blueprint $table) {
+            $table->id();
+            $table->decimal('total_price', 10, 2); // Total harga dari tiket + makanan dan minuman
+            $table->datetime('booking_date'); // Waktu dan tanggal pemesanan
+            $table->enum('status', ['pending', 'paid', 'cancelled'])->default('pending');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('showtime_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('bookings');
+    }
+};
