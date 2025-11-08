@@ -16,18 +16,18 @@ class StudioSeeder extends Seeder
         // Buat data awal studio (2 studio dengan kapasitas sebanyak 40 kursi)
         DB::table('studios')->upsert([
             [
-                'name_studio' => 'Studio 1',
-                'capacity' => 40,
+                'studio_name' => 'Studio 1',
+                'seat_capacity' => 40,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'name_studio' => 'Studio 2',
-                'capacity' => 40,
+                'studio_name' => 'Studio 2',
+                'seat_capacity' => 40,
                 'created_at' => now(),
                 'updated_at' => now()
             ]
-        ], ['name_studio'], 
-        ['name_studio', 'capacity', 'updated_at']);
+        ], ['studio_name'], 
+        ['studio_name', 'seat_capacity', 'updated_at']);
     }
 }

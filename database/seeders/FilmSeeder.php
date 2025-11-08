@@ -19,42 +19,45 @@ class FilmSeeder extends Seeder
          */
         DB::table('films')->upsert([
             [
-                'title' => 'Jalan Malam Kenangan',
-                'publisher' => 'Budi Cahya Studio',
-                'year' => 2025,
-                'duration_mins' => 120,
-                'sinopsis' => 'Placeholder_Sinopsis_Drama',
-                'normal_price' => 30000.00,
-                'poster_link' => '/storage/poster/fake_film1.png',
+                'title' => 'Mr Thinker',
+                'publisher' => 'Broken Arrow Studio',
+                'released_year' => 2025,
+                'genre' => 'Biography',
+                'duration_mins' => 160,
+                'sinopsis' => 'Placeholder_Sinopsis_Biography',
+                'rating' => 8.2,
+                'poster_path' => '/storage/poster/fake_film1.png',
                 'user_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'title' => 'Mr Thinker',
-                'publisher' => 'Broken Arrow Studio',
-                'year' => 2025,
-                'duration_mins' => 160,
-                'sinopsis' => 'Placeholder_Sinopsis_Biography',
-                'normal_price' => 45000.00,
-                'poster_link' => '/storage/poster/fake_film2.png',
-                'user_id' => 1,
+                'title' => 'Jalan Malam Kenangan',
+                'publisher' => 'Budi Cahya Studio',
+                'released_year' => 2025,
+                'genre' => 'Drama',
+                'duration_mins' => 120,
+                'sinopsis' => 'Placeholder_Sinopsis_Drama',
+                'rating' => 8.5,
+                'poster_path' => '/storage/poster/fake_film2.png',
+                'user_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'title' => 'The Third One',
                 'publisher' => 'Beyond Dreams',
-                'year' => 2025,
+                'released_year' => 2025,
+                'genre' => 'Adventure',
                 'duration_mins' => 110,
                 'sinopsis' => 'Placeholder_Sinopsis_Adventure',
-                'normal_price' => 40000.00,
-                'poster_link' => '/storage/poster/fake_film3.png',
+                'rating' => 7.0,
+                'poster_path' => '/storage/poster/fake_film3.png',
                 'user_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ]
-        ], ['title', 'publisher', 'year'], 
-        ['title', 'publisher', 'duration_mins', 'sinopsis', 'normal_price', 'poster_link' ,'user_id', 'updated_at']);
+        ], ['title', 'publisher', 'released_year'], 
+        ['title', 'publisher', 'released_year', 'genre', 'duration_mins', 'sinopsis', 'rating', 'poster_path' ,'user_id', 'updated_at']);
     }
 }
