@@ -1,0 +1,142 @@
+/* Umum */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Background blur */
+.background {
+  background: url('bg.jpeg') no-repeat center center/cover;
+  filter: brightness(0.4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+
+/* 🔹 Logo di pojok kiri atas */
+.header {
+  position: fixed;
+  top: 10px;
+  left: 20px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* default kiri */
+}
+
+.logo-img {
+  height: 150px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 0 6px rgba(0,0,0,0.6));
+}
+
+.logo-img:hover {
+  transform: scale(1.05);
+}
+
+/* Container utama */
+.container {
+  text-align: center;
+  color: #fff;
+  width: 90%;
+  max-width: 400px;
+}
+
+/* Kotak login */
+.login-box {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  padding: 40px 30px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  text-align: left;
+}
+
+.login-box h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 1.2rem;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.login-box input::placeholder {
+  color: #ccc;
+}
+
+.login-box button {
+  width: 100%;
+  padding: 12px;
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.login-box button:hover {
+  background-color: #cc0000;
+}
+
+/* Link bawah */
+.links {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+
+.links a {
+  color: #00aaff;
+  text-decoration: none;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
+
+/* 🔹 Tablet */
+@media (max-width: 768px) {
+  .logo-img {
+    height: 180px;
+  }
+}
+
+/* 🔹 Mobile - logo di tengah */
+@media (max-width: 480px) {
+  .header {
+    top: 10px;
+    left: 0;
+    width: 100%;
+    justify-content: center;   /* ⬅️ bikin logo ke tengah */
+  }
+
+  .logo-img {
+    height: 180px;
+  }
+}
