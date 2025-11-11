@@ -26,7 +26,7 @@ class FilmSeeder extends Seeder
                 'duration_mins' => 160,
                 'sinopsis' => 'Placeholder_Sinopsis_Biography',
                 'rating' => 8.2,
-                'poster_path' => '/storage/poster/fake_film1.png',
+                'poster_path' => 'poster/fake_film1.png',
                 'user_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -39,7 +39,7 @@ class FilmSeeder extends Seeder
                 'duration_mins' => 120,
                 'sinopsis' => 'Placeholder_Sinopsis_Drama',
                 'rating' => 8.5,
-                'poster_path' => '/storage/poster/fake_film2.png',
+                'poster_path' => 'poster/fake_film2.png',
                 'user_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -52,7 +52,7 @@ class FilmSeeder extends Seeder
                 'duration_mins' => 110,
                 'sinopsis' => 'Placeholder_Sinopsis_Adventure',
                 'rating' => 7.0,
-                'poster_path' => '/storage/poster/fake_film3.png',
+                'poster_path' => 'poster/fake_film3.png',
                 'user_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now()

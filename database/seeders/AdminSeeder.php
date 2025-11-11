@@ -26,7 +26,6 @@ class AdminSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
                 'role' => 'admin', // Berikan user role admin
-                'gender' => 'laki-laki'
             ],
             [
                 'name' => 'Administrator 2',
@@ -37,9 +36,8 @@ class AdminSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
                 'role' => 'admin', // Berikan user role admin
-                'gender' => 'perempuan'
             ],
         ],['email'],
-        ['name', 'email', 'password', 'remember_token', 'updated_at', 'role', 'gender']);
+        ['name', 'email', 'password', 'remember_token', 'updated_at', 'role']);
     }
 }
