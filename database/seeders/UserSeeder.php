@@ -26,7 +26,6 @@ class UserSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
                 'role' => 'customer', // Berikan user role customer
-                'gender' => 'laki-laki'
             ],
             [
                 'name' => 'User 2',
@@ -37,9 +36,8 @@ class UserSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
                 'role' => 'customer', // Berikan user role customer
-                'gender' => 'perempuan'
             ],
         ],['email'],
-        ['name', 'email', 'password', 'remember_token', 'updated_at', 'role', 'gender']);
+        ['name', 'email', 'password', 'remember_token', 'updated_at', 'role']);
     }
 }
