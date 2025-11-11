@@ -59,7 +59,7 @@ php artisan migrate
 npm run dev
 php artisan serve
 ```
-6. Install Laravel Breeze dan setup mail
+6. Setup mail
 ```bash
 # Menginstall package yang terbaru dari composer dan npm
 composer install
@@ -92,6 +92,8 @@ php artisan optimize:clear
 ```bash
 php artisan storage:link
 ```
+
+8. Instruksi cara update akan diberikan lewat WA
 
 ## Catatan
 Berikut adalah catatan yang bisa dicek untuk informasi lebih lanjut dari proyek:

@@ -84,8 +84,10 @@ php artisan optimize:clear
 php artisan storage:link
 ```
 
+8. Instruksi cara update akan diberikan lewat WA
+
 ## Struktur Folder Proyek dan Tempat Bekerja
-* 'app/': Logika backend (controller, model)
+* 'app/': Logika backend (Models, Controllers)
 * 'database/': Struktur tabel dan data awal
 * 'public/build': Folder hasil build frontend **(OTOMATIS, JANGAN DIMODIFIKASI)**
 * 'public/images': Folder untuk menaruh aset gambar statis/jarang diubah (Logo website, banner, dll)
@@ -102,11 +104,12 @@ Frontend: 'resources/views', 'resources/css', 'resources/js', dan 'public/images
 Ketua: Semua folder<br>
 Laporan & Presentasi: 'README.md' dan 'CONTRIBUTING.md'<br>
 
-Jangan mengubah atau menambah file atau folder lain tanpa diskusi ke anggota/tim yang berkaitan.<br>
-Folder 'storage/app' digunakan untuk menyimpan hasil unggahan dari user melalui form input html tipe file.<br>
+### PERINGATAN!<br>
+**Jangan mengubah atau menambah file atau folder lain tanpa diskusi ke anggota/tim yang berkaitan.**<br>
+**Folder 'storage/app' digunakan untuk menyimpan hasil unggahan dari user melalui form input html tipe file.**<br>
 
 ## Cara Kontribusi (Tambah/Edit Fitur)
-1. Pastikan proyek lokal anda sudah versi terbaru:
+1. Pastikan proyek lokal anda sudah versi terbaru **(MANUAL)**:
 ```bash
 git pull origin main
 ```
@@ -120,9 +123,11 @@ git checkout -b nama_branch
 ```bash
 git add .
 git commit -m "Sesuaikan isi pesan dengan yang dikerjakan"
+# Jalankan perintah di bawah jika sudah pasti fitur tidak bermasalah
 git push origin nama_branch
 ```
-5. Buka Github, buat Pull Request (PR) ke main. Yang nanti akan direview dan digabungkan jika sudah benar.
+5. Buka Github, buat Pull Request (PR) ke main. Yang nanti akan direview ketua dan digabungkan jika sudah benar.
+6. Jangan dimerge ke main sebelum ada konfirmasi dari ketua.
 
 ## Aturan Penulisan Kode
 * Gunakan komentar di setiap fungsi dan logika penting.
@@ -132,7 +137,7 @@ git push origin nama_branch
 * Sebelum migrasi besar simpan backup database.
 * Pastikan website bisa berjalan tanpa error menggunakan 'npm run dev dan php artisan serve' sebelum push.
 
-## Sinkronisasi Harian
+## Sinkronisasi Harian **(MANUAL)**
 Sebelum mulai koding:
 ```bash
 git pull origin main
