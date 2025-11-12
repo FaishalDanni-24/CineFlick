@@ -23,6 +23,9 @@ class Film extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function showtime(){
+        return $this->hasMany(Showtime::class);
+    }
 
     public function getPosterUrlAttribute(): ?string
     {

@@ -23,6 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -52,5 +53,14 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
     public function canAccessPanel(Panel $panel): bool
     {
         return $this->role === 'admin';
+    }
+    public function film(){
+        return $this->hasMany(Film::class);
+    }
+    public function showtime(){
+        return $this->hasMany(Showtime::class);
+    }
+    public function booking(){
+        return $this->hasMany(Booking::class);
     }
 }
