@@ -23,7 +23,8 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
         'name',
         'email',
         'password',
-        'role'
+        'role',
+        'email_verified_at' // Hanya digunakan pada panel admin, agar akun buatan panel otomatis verified
     ];
 
     /**
