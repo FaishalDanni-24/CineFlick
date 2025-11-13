@@ -29,6 +29,7 @@ Diambil dari README.md<br>
 Pastikan ikut setiap tahap ini untuk menginstall project ke sistem anda, gunakan terminal di laragon:
 1. Masuk ke terminal dan pilih folder seperti dibawah:
 ```bash
+# Sesuaikan dengan folder instalasi laragon masing-masing
 cd C:\laragon\www\
 ```
 2. clone project dari git di bawah:
@@ -43,23 +44,16 @@ npm install
 copy .env.example .env
 php artisan key:generate
 ```
-4. Buat database dengan nama "cineflick_db" di phpMyAdmin
-5. Jalankan kode ini (php artisan serve bisa diskip kalau website udah bisa diakses dari laragon)
+4. Buat data (php artisan serve bisa diskip kalau website udah bisa diakses dari laragon)
 ```bash
-php artisan migrate
-npm run dev
+php artisan migrate:fresh --seed # Jika ditanya seperti ini, Database cineflick_db does not exist. Do you want to create it? pilih yes
+npm run dev # Menjalankan vite untuk frontend
 php artisan serve
 ```
-6. Install Laravel Breeze dan setup mail
-```bash
-# Menginstall package yang terbaru dari composer dan npm
-composer install
-npm install
-php artisan migrate # Jika sudah ada pesan nothing to migrate, berarti tidak ada tabel baru
-```
-Tahap selanjutnya diperlukan untuk fitur email seperti (Recovery dari Forgot Password, Verifikasi Email, dll).<br>
+5. Setup layanan mail
+Tahap ini diperlukan untuk fitur email seperti (Recovery dari Forgot Password, Verifikasi Email, dll).<br>
 **Pastikan Mailpit di laragon sudah jalan.**<br>
-Setelah instalasi, pastikan config di ".env" anda dengan nilai berikut:
+Setelah instalasi, buka file ".env" dan pastikan config di ".env" anda dengan nilai berikut:
 ```txt
 MAIL_MAILER=smtp
 MAIL_SCHEME=null
@@ -70,7 +64,19 @@ MAIL_PASSWORD=null
 MAIL_FROM_ADDRESS="cineflick@testmail.com"
 MAIL_FROM_NAME="${APP_NAME}"
 ```
-Lalu jalankan kode ini di terminal laragon, untuk membersihkan cache:
+6. Setup file ".env"
+Di file ".env", selain di bagian mail (tahap 6). Pastikan nilainya yang ada di file seperti ini:
+```txt
+APP_URL=https://cineflick.test # Sesuaikan dengan URL website
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=cineflick_db
+DB_USERNAME=root
+DB_PASSWORD= # Jika database mysql ada password, masukkan passwordnya
+```
+8. Lalu jalankan kode ini di terminal laragon, untuk membersihkan cache:
 ```bash
 php artisan config:clear
 php artisan cache:clear
@@ -79,12 +85,10 @@ php artisan view:clear
 # Atau (Bersihkan semua cache)
 php artisan optimize:clear
 ```
-7. Membuat symbolic link folder 'storage/app/public' ke 'public/'
+9. Membuat symbolic link folder 'storage/app/public'
 ```bash
 php artisan storage:link
 ```
-
-8. Instruksi cara update akan diberikan lewat WA
 
 ## Struktur Folder Proyek dan Tempat Bekerja
 * 'app/': Logika backend (Models, Controllers)
@@ -123,10 +127,11 @@ git checkout -b nama_branch
 ```bash
 git add .
 git commit -m "Sesuaikan isi pesan dengan yang dikerjakan"
+# Perintah di atas boleh dilakukan berkali-kali, untuk menyimpan progress lokal
 # Jalankan perintah di bawah jika sudah pasti fitur tidak bermasalah
 git push origin nama_branch
 ```
-5. Buka Github, buat Pull Request (PR) ke main. Yang nanti akan direview ketua dan digabungkan jika sudah benar.
+5. Buka Github, buat Pull Request (PR) ke main dan pilih FaishalDanni-24 sebagai reviewer. Nanti akan direview ketua dan diberikan instruksi lebih lanjut.
 6. Jangan dimerge ke main sebelum ada konfirmasi dari ketua.
 
 ## Aturan Penulisan Kode
@@ -134,6 +139,7 @@ git push origin nama_branch
 * Gunakan nama variabel yang mudah dipahami dan jelas (Contoh: movie_list).
 * **Jangan** ubah branch main langsung, kerjakan di branch fitur.
 * Satu fitur = satu branch = satu orang.
+* Jika fitur saling berkaitan, maka cukup satu branch saja (Misal: Branch fitur_login_page maka kerjakan Login page, Register page, dll).
 * Sebelum migrasi besar simpan backup database.
 * Pastikan website bisa berjalan tanpa error menggunakan 'npm run dev dan php artisan serve' sebelum push.
 
