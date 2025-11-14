@@ -1,3 +1,9 @@
+// Alpine JS dari Laravel Breeze
+import './bootstrap';
+import Alpine from 'alpinejs';
+window.Alpine = Alpine;
+Alpine.start();
+
 // Data Film/Movie
 const movies = [
   { title: 'KEADILAN', genre: 'Action' },
