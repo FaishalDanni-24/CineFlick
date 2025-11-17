@@ -31,10 +31,12 @@
                     <i class="fas fa-utensils"></i>
                     <span>Food &amp; Drink</span>
                 </a>
-                <a href="#" class="nav-item">
-                    <i class="fas fa-clock"></i>
-                    <span>History</span>
-                </a>
+                @auth
+                    <a href="{{ route('history.index') }}" class="nav-item">
+                        <i class="fas fa-clock"></i>
+                        <span>History</span>
+                    </a>
+                @endauth
             </nav>
 
             <div class="sidebar-footer">
