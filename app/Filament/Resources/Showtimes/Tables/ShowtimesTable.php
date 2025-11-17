@@ -24,7 +24,7 @@ class ShowtimesTable
                     ->time()
                     ->sortable(),
                 TextColumn::make('normal_price')
-                    ->numeric()
+                    ->money('IDR')
                     ->sortable(),
                 TextColumn::make('film_id')
                     ->numeric()

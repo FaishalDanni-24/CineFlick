@@ -15,7 +15,7 @@ class BookingsTable
         return $table
             ->columns([
                 TextColumn::make('total_price')
-                    ->numeric()
+                    ->money('IDR')
                     ->sortable(),
                 TextColumn::make('booking_date')
                     ->dateTime()

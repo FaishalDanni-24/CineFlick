@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Seats\Schemas;
 
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
 use Filament\Schemas\Schema;
 
 class SeatForm
@@ -16,9 +17,10 @@ class SeatForm
                 TextInput::make('seat_number')
                     ->required()
                     ->numeric(),
-                TextInput::make('studio_id')
-                    ->required()
-                    ->numeric(),
+                Select::make('studio_id')
+                    ->label('Studio Name')
+                    ->relationship('studio', 'studio_name')
+                    ->required(),
             ]);
     }
 }

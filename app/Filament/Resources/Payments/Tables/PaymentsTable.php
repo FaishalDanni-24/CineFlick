@@ -17,7 +17,7 @@ class PaymentsTable
                 TextColumn::make('method')
                     ->badge(),
                 TextColumn::make('amount')
-                    ->numeric()
+                    ->money('IDR')
                     ->sortable(),
                 TextColumn::make('payment_date')
                     ->dateTime()

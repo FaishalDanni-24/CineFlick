@@ -14,17 +14,19 @@ class PaymentForm
         return $schema
             ->components([
                 Select::make('method')
-                    ->options(['E-Wallet' => 'E  wallet', 'QRIS' => 'Q r i s', 'VA' => 'V a'])
+                    ->options(['E-Wallet' => 'E Wallet', 'QRIS' => 'QRIS', 'VA' => 'VA'])
                     ->required(),
                 TextInput::make('amount')
                     ->required()
-                    ->numeric(),
+                    ->numeric()
+                    ->prefix('Rp'),
                 DateTimePicker::make('payment_date'),
                 Select::make('status')
                     ->options(['pending' => 'Pending', 'success' => 'Success', 'failed' => 'Failed'])
                     ->default('pending')
                     ->required(),
                 Select::make('booking_id')
+                    ->label('Booking_id')
                     ->relationship('booking', 'id')
                     ->required(),
             ]);

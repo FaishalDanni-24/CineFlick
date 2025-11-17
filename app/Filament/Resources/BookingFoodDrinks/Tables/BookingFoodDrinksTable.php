@@ -18,7 +18,7 @@ class BookingFoodDrinksTable
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('subtotal')
-                    ->numeric()
+                    ->money('IDR')
                     ->sortable(),
                 TextColumn::make('booking_id')
                     ->numeric()
