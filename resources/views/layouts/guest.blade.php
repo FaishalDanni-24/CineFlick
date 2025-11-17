@@ -1,30 +1,41 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'CineFlick') }}</title>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
+<body class="relative min-h-screen bg-cover bg-center bg-no-repeat"
+      style="background-image: url('{{ asset('images/bg.jpeg') }}')">
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
-        </div>
-    </body>
+    <!-- 🔥 LOGO (Mobile turun + padding, Desktop kembali normal) -->
+    <div class="
+        absolute 
+        w-full 
+        flex justify-center
+        top-20 px-4      <!-- 📱 Tambah jarak turun + padding horizontal -->
+        md:top-6 md:left-6 md:px-0 md:justify-start
+        z-50
+    ">
+        <img src="{{ asset('images/Logo_CineFlick.png') }}" 
+             alt="CineFlick Logo"
+             class="h-20 object-contain">
+    </div>
+
+    <!-- 🔥 FORM (Mobile padding + turun sedikit) -->
+    <div class="
+        w-full min-h-screen 
+        flex items-start justify-center
+        pt-40 px-6        <!-- 📱 Form turun + padding kiri/kanan -->
+        md:pt-0 md:items-center md:px-0
+        bg-black/70 
+    ">
+        {{ $slot }}
+    </div>
+
+</body>
 </html>
