@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class FoodDrinkPaymentController extends Controller
 {
@@ -40,7 +41,7 @@ class FoodDrinkPaymentController extends Controller
         }
 
         $validated = $request->validate([
-            'payment_method' => 'required|in:credit_card,debit_card,e_wallet,bank_transfer',
+            'payment_method' => 'required|in:e_wallet,qris,va',
             'amount' => 'required|numeric|min:0.01',
         ]);
 
@@ -50,13 +51,17 @@ class FoodDrinkPaymentController extends Controller
                 return back()->with('error', 'Payment amount does not match cart total.');
             }
 
-            // Process payment (integrate with actual payment gateway in production)
-            // For now, we'll just clear the cart and show success
+            // TODO: Integrate with real payment gateway. We'll simulate success here.
+            // For food & drink payments (no booking association), we skip Payment record creation
+            // and only clear the cart on success.
 
+            // Clear cart on success
             session()->forget(['fooddrink_cart', 'fooddrink_total']);
 
             return redirect()->route('fooddrink.payment.success')->with('success', 'Payment processed successfully!');
         } catch (\Exception $e) {
+            Log::error('FoodDrink payment processing failed', ['error' => $e->getMessage()]);
+
             return back()->with('error', 'Payment processing failed. Please try again.');
         }
     }

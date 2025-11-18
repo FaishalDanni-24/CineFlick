@@ -7,6 +7,7 @@ use App\Models\Payment;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
 {
@@ -38,25 +39,57 @@ class PaymentController extends Controller
         }
 
         $validated = $request->validate([
-            'payment_method' => 'required|in:credit_card,debit_card,e_wallet,bank_transfer',
+            'payment_method' => 'required|in:e_wallet,qris,va',
             'amount' => 'required|numeric|min:0.01',
         ]);
 
-        try {
-            // Create payment record
-            $payment = Payment::create([
-                'booking_id' => $booking->id,
+        // Map incoming method value to DB enum values defined in migration
+        $methodMap = [
+            'e_wallet' => 'E-Wallet',
+            'qris' => 'QRIS',
+            'va' => 'VA',
+        ];
+
+        $method = $methodMap[$validated['payment_method']] ?? $validated['payment_method'];
+
+        // Use updateOrCreate to avoid unique constraint issues (one payment per booking)
+        $payment = Payment::updateOrCreate(
+            ['booking_id' => $booking->id],
+            [
                 'amount' => $validated['amount'],
-                'payment_method' => $validated['payment_method'],
-                'status' => 'completed',
-                'transaction_date' => now(),
+                'method' => $method,
+                'status' => 'pending',
+                'payment_date' => now(),
+            ]
+        );
+
+        try {
+            // TODO: Integrate with real payment gateway here.
+            // For now we'll simulate a synchronous successful payment.
+
+            // Simulate success: update payment to 'success'
+            $payment->update([
+                'status' => 'success',
+                'payment_date' => now(),
             ]);
 
-            // Update booking status
-            $booking->update(['status' => 'completed']);
+            // Update booking status to 'paid'
+            $booking->update(['status' => 'paid']);
 
             return redirect()->route('payment.success', $booking)->with('success', 'Payment processed successfully!');
         } catch (\Exception $e) {
+            // On failure, mark payment as failed and keep booking as 'pending'
+            try {
+                $payment->update([
+                    'status' => 'failed',
+                    'payment_date' => now(),
+                ]);
+            } catch (\Exception $ex) {
+                Log::error('Failed to update payment status to failed', ['error' => $ex->getMessage(), 'booking_id' => $booking->id]);
+            }
+
+            Log::error('Payment processing failed', ['error' => $e->getMessage(), 'booking_id' => $booking->id]);
+
             return back()->with('error', 'Payment processing failed. Please try again.');
         }
     }
