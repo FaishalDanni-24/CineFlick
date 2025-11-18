@@ -9,7 +9,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="relative min-h-screen bg-cover bg-center bg-no-repeat">
+<body class="relative min-h-screen bg-cover bg-center bg-no-repeat"
       style="background-image: url('{{ asset('images/bg.jpeg') }}')">
 
     <!-- 🔥 LOGO (Mobile turun + padding, Desktop kembali normal) -->
