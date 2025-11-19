@@ -39,7 +39,7 @@ class PaymentController extends Controller
         }
 
         $validated = $request->validate([
-            'payment_method' => 'required|in:e_wallet,qris,va',
+            'method' => 'required|in:e_wallet,qris,va',
             'amount' => 'required|numeric|min:0.01',
         ]);
 
@@ -50,7 +50,7 @@ class PaymentController extends Controller
             'va' => 'VA',
         ];
 
-        $method = $methodMap[$validated['payment_method']] ?? $validated['payment_method'];
+        $method = $methodMap[$validated['method']] ?? $validated['method'];
 
         // Use updateOrCreate to avoid unique constraint issues (one payment per booking)
         $payment = Payment::updateOrCreate(
