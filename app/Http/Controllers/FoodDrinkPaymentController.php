@@ -41,7 +41,7 @@ class FoodDrinkPaymentController extends Controller
         }
 
         $validated = $request->validate([
-            'payment_method' => 'required|in:e_wallet,qris,va',
+            'method' => 'required|in:e_wallet,qris,va',
             'amount' => 'required|numeric|min:0.01',
         ]);
 
