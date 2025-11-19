@@ -25,15 +25,6 @@ class TicketForm
                     ->label('Seat_id')
                     ->relationship('seat', 'id')
                     ->required(),
-                FileUpload::make('qr_code_path')
-                    ->label('QR Code')
-                    ->directory('qr_code')
-                    ->disk('public') // Atribut ini untuk menaruh file di folder storage/app/public
-                    ->visibility('public') // Atribut ini untuk mengizinkan public untuk melihat file
-                    ->image()
-                    ->imagePreviewHeight('150')
-                    ->nullable()
-                    ->preserveFilenames(),
             ]);
     }
 }

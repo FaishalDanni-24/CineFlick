@@ -17,8 +17,6 @@ class TicketsTable
                 TextColumn::make('ticket_price')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('qr_code_path')
-                    ->searchable(),
                 TextColumn::make('booking.id')
                     ->searchable(),
                 TextColumn::make('seat.id')
