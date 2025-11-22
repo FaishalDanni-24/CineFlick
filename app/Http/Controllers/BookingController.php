@@ -8,6 +8,7 @@ use App\Models\Ticket;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\FoodDrink;
 
 class BookingController extends Controller
 {
@@ -58,6 +59,7 @@ class BookingController extends Controller
             Ticket::create([
                 'booking_id' => $booking->id,
                 'seat_id' => $seatId,
+                'ticket_price' => $showtime->normal_price,
                 'status' => 'pending',
             ]);
         }
@@ -81,8 +83,10 @@ class BookingController extends Controller
 
         $booking->load(['showtime.film', 'ticket']);
         
+        $foods = FoodDrink::all();
         return view('booking.add-food', [
             'booking' => $booking,
+            'foods' => $foods,
         ]);
     }
 
