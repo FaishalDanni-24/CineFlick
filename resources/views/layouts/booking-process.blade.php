@@ -8,8 +8,12 @@
 </head>
 <body class="bg-gray-900 text-white">
     <header class="border-b border-white/10">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-            <div class="text-xl font-semibold">CineFlick</div>
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center">
+            <div>
+                <a href="{{ url('/') }}" class="inline-block">
+                    <img src="{{ asset('images/Logo_Cineflick_Small.png') }}" alt="CineFlick" class="h-8">
+                </a>
+            </div>
             <nav class="flex items-center gap-3 text-sm">
                 <span class="px-3 py-1 rounded-full bg-white/10">Pilih Kursi</span>
                 <span class="text-white/40">›</span>
@@ -19,10 +23,14 @@
                 <span class="text-white/40">›</span>
                 <span class="px-3 py-1 rounded-full bg-red-600 text-white">Pembayaran</span>
             </nav>
-        </div>
+        </div>  
+
+    <div class="max-w-6xl mx-auto px-6 py-8">  
+         @yield('content')
+    </div>
+    
     </header>
-    <main class="max-w-6xl mx-auto px-6 py-8">
-        @yield('content')
-    </main>
+
+    
 </body>
 </html>
