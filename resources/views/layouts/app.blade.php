@@ -7,14 +7,11 @@
 
     <title>{{ config('app.name', 'CineFlick') }}</title>
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
-    <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
     <style>
@@ -22,7 +19,7 @@
             margin: 0;
             padding: 0;
             background-color: #111827;
-            background-image: url('{{ asset("images/pattern 3.png") }}');
+            background-image: url('{{ asset("images/pattern-3.png") }}');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -50,15 +47,11 @@
 <body class="font-sans antialiased">
     <div class="app-wrapper">
         <div class="min-h-screen flex w-full">
-            <!-- Sidebar -->
             <x-sidebar />
             
-            <!-- Main Content Area -->
             <div class="flex-1 flex flex-col w-full">
-                <!-- Navbar -->
                 <x-navbar />
                 
-                <!-- Page Content -->
                 <main class="flex-1 w-full overflow-y-auto">
                     {{ $slot }}
                 </main>
@@ -66,7 +59,6 @@
         </div>
     </div>
     
-    <!-- Trailer Modal -->
     <x-trailer-modal />
 </body>
 </html>

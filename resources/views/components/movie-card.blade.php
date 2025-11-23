@@ -1,29 +1,38 @@
 @props(['film'])
 
-<div class="group relative bg-gray-800/80 backdrop-blur-sm rounded-lg overflow-hidden hover:ring-2 hover:ring-red-600 transition shadow-lg hover:shadow-2xl">
-    <div class="aspect-[2/3] relative overflow-hidden bg-gray-700">
+<div class="relative group cursor-pointer h-80 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+    <!-- Poster Image -->
+    @if($film->poster_url)
         <img 
-            src="{{ $film->poster_url ?? asset('images/pattern-3.jpg') }}" 
+            src="{{ $film->poster_url }}" 
             alt="{{ $film->title }}"
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            onerror="this.src='{{ asset('images/pattern-3.jpg') }}'"
         >
-        
-        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
-            <button 
-                @click="$dispatch('open-trailer', { url: '{{ $film->trailer_url ?? '#' }}' })"
-                class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium flex items-center space-x-2 shadow-lg transform group-hover:scale-105 transition"
-            >
-                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/>
+    @else
+        <div class="w-full h-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+            <div class="text-center px-4">
+                <svg class="h-12 w-12 text-gray-500 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                 </svg>
-                <span>Watch Trailer</span>
-            </button>
+                <p class="text-sm text-gray-400">No Image</p>
+            </div>
         </div>
-    </div>
+    @endif
     
-    <div class="p-3">
-        <h3 class="text-white font-semibold text-sm truncate mb-1">{{ $film->title }}</h3>
-        <p class="text-xs text-red-500 font-medium">{{ $film->genre }}</p>
+    <!-- Overlay Info -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4">
+        <!-- Top: Genre & Rating -->
+        <div class="flex justify-between items-start">
+            <span class="inline-block px-2 py-1 bg-red-600 text-white text-xs font-semibold rounded">
+                {{ $film->genre }}
+            </span>
+            <span class="text-yellow-400 font-bold">⭐ {{ $film->rating }}/10</span>
+        </div>
+
+        <!-- Bottom: Title -->
+        <div>
+            <h3 class="text-white font-bold text-sm line-clamp-2">{{ $film->title }}</h3>
+            <p class="text-gray-300 text-xs mt-2">{{ $film->released_year }}</p>
+        </div>
     </div>
 </div>

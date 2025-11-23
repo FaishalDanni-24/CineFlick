@@ -2,11 +2,14 @@
 
 <div 
     x-data="{ 
-        selectedGenre: '{{ $selected }}',
+        selectedGenre: '{{ $selected ?? '' }}',
         async filterByGenre(genre) {
             this.selectedGenre = genre;
             
-            const response = await fetch('{{ route('home') }}?genre=' + genre, {
+            const params = new URLSearchParams();
+            if (genre) params.append('genre', genre);
+            
+            const response = await fetch('{{ route('home') }}?' + params.toString(), {
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'
                 }
@@ -26,7 +29,7 @@
         All
     </button>
     
-    @foreach($genres as $genre)
+    @forelse($genres as $genre)
         <button 
             @click="filterByGenre('{{ $genre }}')"
             :class="selectedGenre === '{{ $genre }}' ? 'bg-red-600 text-white' : 'bg-gray-800 text-gray-300 hover:bg-gray-700'"
@@ -34,15 +37,7 @@
         >
             {{ $genre }}
         </button>
-    @endforeach
+    @empty
+        <p class="text-gray-400">No genres available</p>
+    @endforelse
 </div>
-
-<style>
-    .scrollbar-hide::-webkit-scrollbar {
-        display: none;
-    }
-    .scrollbar-hide {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
-</style>
