@@ -19,7 +19,7 @@ class FoodDrinkSeeder extends Seeder
                 'name' => 'Salt Popcorn',
                 'type' => 'food',
                 'price' => 35000.00,
-                'image_path' => null,
+                'image_path' => 'FoodDrink/popcorn.jpg',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -27,7 +27,7 @@ class FoodDrinkSeeder extends Seeder
                 'name' => 'Caramel Popcorn',
                 'type' => 'food',
                 'price' => 45000.00,
-                'image_path' => null,
+                'image_path' => 'FoodDrink/popcorn.jpg',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -35,7 +35,7 @@ class FoodDrinkSeeder extends Seeder
                 'name' => 'Coffe Latte',
                 'type' => 'drink',
                 'price' => 25000.00,
-                'image_path' => null,
+                'image_path' => 'FoodDrink/latte.jpg',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -43,7 +43,7 @@ class FoodDrinkSeeder extends Seeder
                 'name' => 'Matcha Latte',
                 'type' => 'drink',
                 'price' => 25000.00,
-                'image_path' => null,
+                'image_path' => 'FoodDrink/matcha.jpg',
                 'created_at' => now(),
                 'updated_at' => now()
             ]
