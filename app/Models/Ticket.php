@@ -10,7 +10,8 @@ class Ticket extends Model
     protected $fillable = [
         'ticket_price',
         'booking_id',
-        'seat_id'
+        'seat_id',
+        //'status'
     ];
 
     protected $casts = [
