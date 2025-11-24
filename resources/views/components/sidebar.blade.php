@@ -1,76 +1,144 @@
-<aside class="w-64 bg-gray-900 border-r border-gray-700 flex flex-col">
-    <div class="p-6 border-b border-gray-700">
-        <img src="{{ asset('images/Logo_CineFlick_Small.png') }}" alt="CineFlick Logo" class="h-11 w-auto mx-auto mb-4">
-        @auth
-            <p class="text-gray-300 text-sm mb-2">Hello, {{ Auth::user()->name }}!</p>
-            <div class="flex items-center text-gray-400 text-sm">
-                <svg class="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+{{--
+    SIDEBAR COMPONENT
+    
+    Fitur:
+    - Collapsible (desktop) dengan smooth transition
+    - Hamburger menu (mobile)
+    - Logo CineFlick di header
+    - User info (jika authenticated)
+    - Navigation menu: Home, Movies, Food & Drink, History
+    - Login/Register buttons (guest)
+    - Settings & Logout (authenticated)
+    
+    Responsive:
+    - Desktop (lg): Fixed left, width 256px
+    - Mobile: Overlay dengan backdrop
+--}}
+
+<aside 
+    id="sidebar" 
+    class="fixed top-0 left-0 z-40 h-screen w-64 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out bg-gray-800 border-r border-gray-700"
+>
+    {{-- Mobile Backdrop --}}
+    <div class="lg:hidden fixed inset-0 bg-black bg-opacity-50 -z-10" id="sidebar-backdrop"></div>
+
+    <div class="flex flex-col h-full">
+        {{-- Header: Logo + Close Button --}}
+        <div class="flex items-center justify-between px-6 pt-6 pb-3">
+            <img src="{{ asset('images/Logo_CineFlick.png') }}" alt="CineFlick" class="h-8">
+            
+            {{-- Close button (mobile only) --}}
+            <button id="sidebar-close" class="lg:hidden text-gray-400 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                 </svg>
-                Cilegon
+            </button>
+        </div>
+
+        {{-- User Info / Greeting Section --}}
+        <div class="px-6 pb-4">
+            @auth
+                {{-- Authenticated User --}}
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center text-white font-bold text-lg">
+                        {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                    </div>
+                    <div>
+                        <p class="text-white font-semibold">Hello, {{ Auth::user()->name }}!</p>
+                        <p class="text-gray-400 text-sm">{{ Auth::user()->email }}</p>
+                    </div>
+                </div>
+            @else
+                {{-- Guest User --}}
+                <div class="text-left">
+                    <p class="text-gray-300 font-semibold">Welcome to CineFlick!</p>
+                </div>
+            @endauth
+        </div>
+
+        {{-- Navigation Menu --}}
+        <nav class="flex-1 overflow-y-auto p-4 border-t border-gray-700">
+            <ul class="space-y-2">
+                {{-- Home --}}
+                <li>
+                    <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'bg-red-600 text-white' : 'text-gray-300 hover:bg-gray-700' }} flex items-center gap-3 px-4 py-3 rounded-lg transition">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                        </svg>
+                        <span class="font-semibold">Home</span>
+                    </a>
+                </li>
+
+                {{-- Movies --}}
+                <li>
+                    <a href="{{ route('movies.index') }}" class="{{ request()->routeIs('movies.*') ? 'bg-red-600 text-white' : 'text-gray-300 hover:bg-gray-700' }} flex items-center gap-3 px-4 py-3 rounded-lg transition">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"/>
+                        </svg>
+                        <span class="font-semibold">Movies</span>
+                    </a>
+                </li>
+
+                {{-- Food & Drink --}}
+                <li>
+                    <a href="{{ route('fooddrink.index') }}" class="{{ request()->routeIs('fooddrink.*') ? 'bg-red-600 text-white' : 'text-gray-300 hover:bg-gray-700' }} flex items-center gap-3 px-4 py-3 rounded-lg transition">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                        <span class="font-semibold">Food & Drink</span>
+                    </a>
+                </li>
+
+                {{-- History (hanya untuk authenticated) --}}
+                @auth
+                <li>
+                    <a href="{{ route('history.index') }}" class="{{ request()->routeIs('history.*') ? 'bg-red-600 text-white' : 'text-gray-300 hover:bg-gray-700' }} flex items-center gap-3 px-4 py-3 rounded-lg transition">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span class="font-semibold">History</span>
+                    </a>
+                </li>
+                @endauth
+            </ul>
+        </nav>
+
+        {{-- Bottom Actions - TOMBOL LOGIN/REGISTER --}}
+        @guest
+            {{-- Guest User: Login & Register Buttons --}}
+            <div class="p-4 border-t border-gray-700">
+                <div class="space-y-2">
+                    <a href="{{ route('login') }}" class="block w-full px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-center font-semibold transition">
+                        Login
+                    </a>
+                    <a href="{{ route('register') }}" class="block w-full px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg text-center font-semibold transition">
+                        Register
+                    </a>
+                </div>
             </div>
         @else
-            <p class="text-gray-300 text-sm mb-2">Hello, Guest!</p>
-        @endauth
-    </div>
-    
-    <nav class="flex-1 px-4 py-6 space-y-2">
-        <a href="{{ route('home') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg {{ request()->routeIs('home') ? 'bg-red-600 text-white' : 'text-gray-300 hover:bg-gray-800' }}">
-            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
-            </svg>
-            <span class="font-medium">Home</span>
-        </a>
-        
-        <a href="{{ route('movies.index') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg {{ request()->routeIs('movies.*') ? 'bg-red-600 text-white' : 'text-gray-300 hover:bg-gray-800' }}">
-            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
-            </svg>
-            <span class="font-medium">Movie</span>
-        </a>
-        
-        <a href="{{ route('fooddrink.index') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg {{ request()->routeIs('fooddrink.*') ? 'bg-red-600 text-white' : 'text-gray-300 hover:bg-gray-800' }}">
-            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/>
-            </svg>
-            <span class="font-medium">Food & Drink</span>
-        </a>
-        
-        @auth
-            <a href="{{ route('booking.history') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg {{ request()->routeIs('booking.history') ? 'bg-red-600 text-white' : 'text-gray-300 hover:bg-gray-800' }}">
-                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-                </svg>
-                <span class="font-medium">History</span>
-            </a>
-        @endauth
-    </nav>
-    
-    <div class="p-4 border-t border-gray-700 space-y-2">
-        @auth
-            <a href="{{ route('profile.edit') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-800">
-                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
-                </svg>
-                <span class="font-medium">Setting</span>
-            </a>
-            
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-800 w-full">
-                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"/>
+            {{-- Authenticated User: Settings & Logout --}}
+            <div class="p-4 border-t border-gray-700 space-y-2">
+                {{-- Settings --}}
+                <a href="{{ route('profile.edit') }}" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-lg transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                     </svg>
-                    <span class="font-medium">Log Out</span>
-                </button>
-            </form>
-        @else
-            <a href="{{ route('login') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg bg-red-600 text-white hover:bg-red-700">
-                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                <span class="font-medium">Login</span>
-            </a>
-        @endauth
+                    <span class="font-semibold">Settings</span>
+                </a>
+
+                {{-- Logout --}}
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="w-full flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-red-600 hover:text-white rounded-lg transition">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                        </svg>
+                        <span class="font-semibold">Log Out</span>
+                    </button>
+                </form>
+            </div>
+        @endguest
     </div>
 </aside>
