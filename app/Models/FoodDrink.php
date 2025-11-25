@@ -17,7 +17,14 @@ class FoodDrink extends Model
     protected $casts = [
         'price' => 'decimal:2'
     ];
+    
     public function bookingFoodDrink(){
         return $this->hasMany(BookingFoodDrink::class);
+    }
+    public function getImageUrlAttribute(): ?string
+    {
+        return $this->image_path
+            ? asset('storage/' . $this->image_path)
+            : null;
     }
 }
