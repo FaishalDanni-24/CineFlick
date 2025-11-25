@@ -12,7 +12,7 @@ class Seat extends Model
         'studio_id'
     ];
     public function studio(){
-        return $this->belongsTo(studio::class);
+        return $this->belongsTo(Studio::class);
     }
     public function ticket(){
         return $this->hasMany(Ticket::class);

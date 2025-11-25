@@ -18,7 +18,7 @@ class Booking extends Model
         return $this->belongsTo(User::class);
     }
     public function showtime(){
-        return $this->belongsTo((showtime::class));
+        return $this->belongsTo((Showtime::class));
     }
     public function payment(){
         return $this->hasMany(Payment::class);
