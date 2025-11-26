@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/showtime/{showtime}/booking', [BookingController::class, 'storeBooking'])->name('booking.store');
     Route::get('/booking/{booking}/add-food', [BookingController::class, 'addFood'])->name('booking.add-food');
     Route::get('/booking/{booking}/review', [BookingController::class, 'review'])->name('booking.review');
+    Route::post('/booking/{booking}/cancel', [BookingController::class, 'cancelBooking'])->name('booking.cancel');
 
     // Payment routes
     Route::get('/booking/{booking}/payment', [PaymentController::class, 'show'])->name('payment.show');
