@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Showtime;
 use App\Models\Ticket;
+use App\Models\Payment;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -105,5 +106,47 @@ class BookingController extends Controller
         return view('booking.review', [
             'booking' => $booking,
         ]);
+    }
+
+    /**
+     * Cancel a booking
+     * 
+     * Only allows cancellation if payment status is 'pending'
+     * If payment is already made, user must contact admin
+     */
+    public function cancelBooking(Booking $booking)
+    {
+        // Ensure user owns this booking
+        if ($booking->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized access to this booking');
+        }
+
+        // Check if booking is already cancelled
+        if ($booking->status === 'cancelled') {
+            return redirect()->back()->with('info', 'Booking sudah dibatalkan sebelumnya.');
+        }
+
+        // Get the payment record for this booking
+        $payment = $booking->payment()->first();
+
+        // If no payment record exists yet, simply cancel the booking
+        if (!$payment) {
+            $booking->update(['status' => 'cancelled']);
+            return redirect()->route('history.index')->with('success', 'Booking berhasil dibatalkan.');
+        }
+
+        // If payment status is not 'pending', user must contact admin
+        if ($payment->status !== 'pending') {
+            return view('booking.contact-admin', [
+                'booking' => $booking,
+                'message' => 'Pembatalan hanya tersedia sebelum melakukan pembayaran. Silakan hubungi admin untuk bantuan pembatalan atau pengembalian dana.',
+            ]);
+        }
+
+        // Cancel the booking and mark payment as failed
+        $booking->update(['status' => 'cancelled']);
+        $payment->update(['status' => 'failed']);
+
+        return redirect()->route('history.index')->with('success', 'Booking berhasil dibatalkan dan pembayaran telah dibatalkan.');
     }
 }
