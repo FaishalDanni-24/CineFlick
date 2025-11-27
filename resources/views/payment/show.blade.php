@@ -54,8 +54,10 @@
                 </div>
                 <div>
                     <label class="block text-sm mb-1">Jumlah</label>
-                    <input type="number" name="amount" step="0.01" value="{{ number_format($grandTotal,2,'.','') }}" class="w-full bg-black/30 border border-white/20 rounded px-3 py-2">
-                    @error('amount')<div class="text-red-400 text-xs mt-1">{{ $message }}</div>@enderror
+                    {{-- Visible, read-only field so user can't change value in UI --}}
+                    <input type="text" value="Rp {{ number_format($grandTotal,0,',','.') }}" readonly class="w-full bg-black/30 border border-white/20 rounded px-3 py-2">
+                    {{-- Hidden amount field is included for form completeness but server ignores client value and uses server-side calculation --}}
+                    <input type="hidden" name="amount" value="{{ $grandTotal }}">
                 </div>
                 <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold rounded px-4 py-2">Bayar</button>
             </form>
