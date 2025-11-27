@@ -10,6 +10,7 @@ use Filament\Tables\Table;
 
 class UsersTable
 {
+    // Konfigurasi Tabel Daftar User
     public static function configure(Table $table): Table
     {
         return $table

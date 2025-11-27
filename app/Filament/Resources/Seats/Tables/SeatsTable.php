@@ -10,18 +10,27 @@ use Filament\Tables\Table;
 
 class SeatsTable
 {
+    // Konfigurasi Tabel Daftar Kursi
     public static function configure(Table $table): Table
     {
         return $table
+            // 1. DAFTAR KOLOM
             ->columns([
+                // Menampilkan Baris Kursi
                 TextColumn::make('seat_row')
                     ->searchable(),
+
+                // Menampilkan Nomor Kursi 
                 TextColumn::make('seat_number')
                     ->numeric()
                     ->sortable(),
+
+                // Menampilkan ID Studio
                 TextColumn::make('studio_id')
                     ->numeric()
                     ->sortable(),
+
+                // Timestamp
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -31,8 +40,8 @@ class SeatsTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            // 2. FILTER
             ->filters([
-                //
             ])
             ->recordActions([
                 EditAction::make(),

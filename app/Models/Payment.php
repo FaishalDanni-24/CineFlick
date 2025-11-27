@@ -15,10 +15,14 @@ class Payment extends Model
         'status',
         'booking_id'
     ];
+
+    // Konversi tipe data otomatis
     protected $casts = [
         'payment_date' => 'datetime', //otomatis menjadi objek datetime
         'amount' => 'decimal:2'
     ];
+
+    // Relasi: Pembayaran ini milik satu Booking
     public function booking(): BelongsTo
     {
         return $this->belongsTo(Booking::class);

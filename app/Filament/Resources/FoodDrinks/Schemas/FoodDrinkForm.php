@@ -13,15 +13,22 @@ class FoodDrinkForm
     {
         return $schema
             ->components([
+                // 1. Input Nama Makanan/Minuman
                 TextInput::make('name')
                     ->required(),
+
+                // 2. Pilihan Tipe
                 Select::make('type')
                     ->options(['food' => 'Food', 'drink' => 'Drink'])
                     ->required(),
+
+                // 3. Input Harga
                 TextInput::make('price')
                     ->required()
                     ->numeric()
                     ->prefix('Rp'),
+
+                // 4. Upload Gambar Makanan/Minuman
                 FileUpload::make('image_path')
                     ->label('Image')
                     ->directory('FoodDrink')

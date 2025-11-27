@@ -11,9 +11,11 @@ use Filament\Tables\Table;
 
 class FoodDrinksTable
 {
+    // Konfigurasi tampilan Tabel Daftar Makanan & Minuman
     public static function configure(Table $table): Table
     {
         return $table
+            // 1. DAFTAR KOLOM
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
@@ -34,8 +36,8 @@ class FoodDrinksTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            // 2. FILTER
             ->filters([
-                //
             ])
             ->recordActions([
                 EditAction::make(),

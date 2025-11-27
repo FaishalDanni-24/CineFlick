@@ -10,6 +10,7 @@ use Filament\Tables\Table;
 
 class ShowtimesTable
 {
+    // Konfigurasi Tabel Daftar Jadwal Tayang
     public static function configure(Table $table): Table
     {
         return $table

@@ -16,26 +16,44 @@ class FilmsTable
     public static function configure(Table $table): Table
     {
         return $table
+            // 1. KOLOM TABEL
             ->columns([
+                // Menampilkan Judul Film & Bisa dicari
                 TextColumn::make('title')
                     ->searchable(),
+
+                // Menampilkan Penerbit
                 TextColumn::make('publisher')
                     ->searchable(),
+
+                // Menampilkan Tahun Rilis
                 TextColumn::make('released_year'),
+
+                // Menampilkan Genre
                 TextColumn::make('genre')
                     ->searchable(),
+
+                // Menampilkan Durasi (Angka) & Bisa diurutkan (Sortable)
                 TextColumn::make('duration_mins')
                     ->numeric()
                     ->sortable(),
+
+                // Menampilkan Rating
                 TextColumn::make('rating')
                     ->numeric()
                     ->sortable(),
+
+                // Menampilkan Text Lokasi File Poster
                 TextColumn::make('poster_path')
                     ->label('Poster')
                     ->searchable(),
+            
+                // Menampilkan ID Admin yang menginput
                 TextColumn::make('user_id')
                     ->numeric()
                     ->sortable(),
+                
+                // Timestamp
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -45,6 +63,7 @@ class FilmsTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            //2. FILTER DATA
             ->filters([
                 // Filter tabel
                 Tables\Filters\SelectFilter::make('genre')
@@ -57,6 +76,7 @@ class FilmsTable
                     })
                     ->label('Filter by Genre'),
 
+                //Filter Tahun Rilis
                 Tables\Filters\SelectFilter::make('released_year')
                     ->options(function () {
                         return Film::query()

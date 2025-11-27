@@ -19,14 +19,17 @@ class Film extends Model
         'user_id',
     ];
 
+    // Relasi: Film -> User (Many to One)
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+    // Relasi: Film -> Showtime (One to Many)
     public function showtime(){
         return $this->hasMany(Showtime::class);
     }
 
+    // Mengubah path mentah database jadi URL lengkap siap pakai di Frontend
     public function getPosterUrlAttribute(): ?string
     {
         return $this->poster_path

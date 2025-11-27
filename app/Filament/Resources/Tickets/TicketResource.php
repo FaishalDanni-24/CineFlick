@@ -16,22 +16,28 @@ use Filament\Tables\Table;
 
 class TicketResource extends Resource
 {
+    // 1. KONEKSI MODEL
     protected static ?string $model = Ticket::class;
 
+    // 2. IKON MENU
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    // 3. PENCARIAN GLOBAL
     protected static ?string $recordTitleAttribute = 'id';
 
+    // 4. KONFIGURASI FORM
     public static function form(Schema $schema): Schema
     {
         return TicketForm::configure($schema);
     }
 
+    // 5. KONFIGURASI TABEL
     public static function table(Table $table): Table
     {
         return TicketsTable::configure($table);
     }
 
+    // 6. RELASI
     public static function getRelations(): array
     {
         return [
@@ -39,6 +45,7 @@ class TicketResource extends Resource
         ];
     }
 
+    // 7. ROUTING HALAMAN
     public static function getPages(): array
     {
         return [

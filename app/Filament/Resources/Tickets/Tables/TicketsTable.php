@@ -10,17 +10,26 @@ use Filament\Tables\Table;
 
 class TicketsTable
 {
+    // Konfigurasi Tabel Daftar Tiket
     public static function configure(Table $table): Table
     {
         return $table
+            // 1. DAFTAR KOLOM
             ->columns([
+                // Menampilkan Harga Tiket
                 TextColumn::make('ticket_price')
                     ->numeric()
                     ->sortable(),
+
+                // Menampilkan ID Booking 
                 TextColumn::make('booking.id')
                     ->searchable(),
+
+                 // Menampilkan ID Kursi
                 TextColumn::make('seat.id')
                     ->searchable(),
+
+                 // Timestamp
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -30,6 +39,7 @@ class TicketsTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            // 2. FILTER
             ->filters([
                 //
             ])
