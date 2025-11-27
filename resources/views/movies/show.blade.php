@@ -37,7 +37,7 @@
                         <li class="flex items-center justify-between p-3 bg-white/3 rounded">
                             <div>
                                 <div class="font-medium">{{ \Carbon\Carbon::parse($showtime->start_time)->format('d M Y, H:i') }}</div>
-                                <div class="text-sm">Studio: {{ $showtime->studio?->name ?? $showtime->studio_id }} • Harga: Rp {{ number_format($showtime->price ?? 0,0,',','.') }}</div>
+                                <div class="text-sm">Studio: {{ $showtime->studio?->name ?? $showtime->studio_id }} • Harga: Rp {{ number_format($showtime->normal_price ?? 0,0,',','.') }}</div>
                             </div>
                             <div>
                                 @auth
