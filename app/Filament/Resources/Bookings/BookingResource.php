@@ -16,22 +16,28 @@ use Filament\Tables\Table;
 
 class BookingResource extends Resource
 {
+    // 1. DEFINISI MODEL
     protected static ?string $model = Booking::class;
 
+    // 2. TAMPILAN MENU (SIDEBAR)
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    // Atribut yang digunakan untuk judul data
     protected static ?string $recordTitleAttribute = 'id';
 
+    // 3. KONFIGURASI FORM
     public static function form(Schema $schema): Schema
     {
         return BookingForm::configure($schema);
     }
 
+    // 4. KONFIGURASI TABEL
     public static function table(Table $table): Table
     {
         return BookingsTable::configure($table);
     }
 
+    // 5. RELASI
     public static function getRelations(): array
     {
         return [
@@ -39,6 +45,7 @@ class BookingResource extends Resource
         ];
     }
 
+    // 6. ROUTING HALAMAN
     public static function getPages(): array
     {
         return [

@@ -16,22 +16,28 @@ use Filament\Tables\Table;
 
 class FilmResource extends Resource
 {
+    // 1. KONEKSI MODEL
     protected static ?string $model = Film::class;
 
+    // 2. TAMPILAN SIDEBAR
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    // 3. GLOBAL SEARCH
     protected static ?string $recordTitleAttribute = 'title';
 
+    // 4. KONFIGURASI FORM
     public static function form(Schema $schema): Schema
     {
         return FilmForm::configure($schema);
     }
 
+    // 5. KONFIGURASI TABEL
     public static function table(Table $table): Table
     {
         return FilmsTable::configure($table);
     }
 
+    // 6. RELASI
     public static function getRelations(): array
     {
         return [
@@ -39,6 +45,7 @@ class FilmResource extends Resource
         ];
     }
 
+    // 7. ROUTING HALAMAN
     public static function getPages(): array
     {
         return [

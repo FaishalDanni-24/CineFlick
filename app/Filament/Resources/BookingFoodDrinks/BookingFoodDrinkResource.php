@@ -16,22 +16,27 @@ use Filament\Tables\Table;
 
 class BookingFoodDrinkResource extends Resource
 {
+    // 1. KONEKSI MODEL
     protected static ?string $model = BookingFoodDrink::class;
 
+    // 2. IKON NAVIGASI
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'id';
 
+    // 3. KONFIGURASI FORM
     public static function form(Schema $schema): Schema
     {
         return BookingFoodDrinkForm::configure($schema);
     }
 
+    // 4. KONFIGURASI TABEL
     public static function table(Table $table): Table
     {
         return BookingFoodDrinksTable::configure($table);
     }
 
+    // 5. RELASI
     public static function getRelations(): array
     {
         return [
@@ -39,6 +44,7 @@ class BookingFoodDrinkResource extends Resource
         ];
     }
 
+    // 6. DAFTAR HALAMAN
     public static function getPages(): array
     {
         return [

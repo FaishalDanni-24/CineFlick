@@ -10,6 +10,7 @@ use Filament\Tables\Table;
 
 class StudiosTable
 {
+    // Konfigurasi Tabel Daftar Studio
     public static function configure(Table $table): Table
     {
         return $table
