@@ -90,6 +90,53 @@ class BookingController extends Controller
             'foods' => $foods,
         ]);
     }
+    /**
+     * Store food and drinks to the booking
+     */
+    public function storeFoodDrink(Request $request, Booking $booking)
+    {
+        // Ensure user owns this booking
+        if ($booking->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized access to this booking');
+        }
+
+        $validated = $request->validate([
+            'foods' => 'required|array',
+            'foods.*' => 'nullable|integer|min:0',
+        ]);
+
+        // Get all food drinks to calculate prices
+        $foodDrinks = FoodDrink::all()->keyBy('id');
+
+        // Clear existing food drinks for this booking
+        $booking->bookingFoodDrink()->delete();
+
+        $totalFoodPrice = 0;
+
+        // Add selected foods to booking
+        foreach ($validated['foods'] as $foodId => $quantity) {
+            $quantity = (int) $quantity;
+            
+            if ($quantity > 0 && isset($foodDrinks[$foodId])) {
+                $food = $foodDrinks[$foodId];
+                $subtotal = $food->price * $quantity;
+
+                $booking->bookingFoodDrink()->create([
+                    'food_drink_id' => $foodId,
+                    'quantity' => $quantity,
+                    'subtotal' => $subtotal,
+                ]);
+
+                $totalFoodPrice += $subtotal;
+            }
+        }
+
+        // Update booking total price (tickets + food)
+        $ticketPrice = $booking->ticket->sum('ticket_price');
+        $booking->update(['total_price' => $ticketPrice + $totalFoodPrice]);
+
+        return redirect()->route('booking.review', $booking)->with('success', 'Food and drinks added successfully.');
+    }
 
     /**
      * Display the booking summary/review page before payment
