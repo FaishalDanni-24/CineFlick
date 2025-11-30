@@ -10,11 +10,24 @@
 @include('components.sidebar')
 
 {{-- Main Content Area --}}
-<main class="lg:ml-64 min-h-screen bg-gray-900">
-    @include('components.navbar')
+<main class="lg:ml-64 min-h-screen bg-gray-900 relative">
+    {{-- Background Pattern (FIX: z-index dan positioning) --}}
+    @if($showPattern)
+    <div class="absolute inset-0 pointer-events-none opacity-5"
+         style="background-image: url('{{ asset('images/pattern 3.png') }}'); 
+                background-repeat: repeat; 
+                background-size: 1600px;
+                z-index: 0;">
+    </div>
+    @endif
+
+    {{-- Navbar (FIX: z-index lebih tinggi dari pattern) --}}
+    <div class="relative z-20">
+        @include('components.navbar')
+    </div>
     
     <!-- Content Container -->
-    <div class="container mx-auto px-6 py-8">
+    <div class="container mx-auto px-6 py-8 relative z-10">
         
         {{-- Page Title --}}
         <div class="mb-6">
@@ -22,7 +35,7 @@
             <p class="text-gray-400">Explore our delicious menu options for your movie experience</p>
         </div>
 
-        {{-- Filter Tabs - Using Component Style from Movies --}}
+        {{-- Filter Tabs --}}
         @include('components.genre-filter', [
             'filters' => [
                 ['label' => 'All', 'value' => 'all', 'count' => $counts['all']],
@@ -41,7 +54,12 @@
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
                 @foreach($foodDrinks as $item)
                     <div class="food-card group cursor-pointer" 
-                         onclick="openDetailModal({{ json_encode($item) }})">
+                         data-product-id="{{ $item->id }}"
+                         data-product-name="{{ $item->name }}"
+                         data-product-type="{{ $item->type }}"
+                         data-product-price="{{ $item->price }}"
+                         data-product-image="{{ $item->image_url ?? '' }}"
+                         onclick="openDetailModalFromData(this)">
                         
                         {{-- Product Image --}}
                         <div class="relative aspect-square overflow-hidden rounded-t-lg bg-gradient-to-br from-yellow-400 to-orange-500">
@@ -138,7 +156,18 @@
         <div class="p-6 overflow-y-auto" style="height: calc(100% - 80px);">
             {{-- Product Image --}}
             <div class="relative aspect-square overflow-hidden rounded-xl bg-gradient-to-br from-yellow-400 to-orange-500 mb-6">
-                <img id="modalImage" src="" alt="" class="w-full h-full object-cover">
+                <img id="modalImage" 
+                     src="" 
+                     alt="Product Image" 
+                     class="w-full h-full object-cover"
+                     style="display: none;"
+                     onload="this.style.display='block'; document.getElementById('modalImagePlaceholder').style.display='none';"
+                     onerror="this.style.display='none'; document.getElementById('modalImagePlaceholder').style.display='flex';">
+                <div id="modalImagePlaceholder" class="w-full h-full flex items-center justify-center">
+                    <svg class="w-24 h-24 text-white/50" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/>
+                    </svg>
+                </div>
             </div>
 
             {{-- Product Info --}}
@@ -169,7 +198,7 @@
 
 @push('styles')
 <style>
-/* Food Card Only - No Filter Button Styles */
+/* Food Card */
 .food-card {
     background: transparent;
     border-radius: 0.5rem;
@@ -186,23 +215,75 @@
 
 @push('scripts')
 <script>
+// Ensure Alpine.js is loaded and initialized
+document.addEventListener('alpine:init', () => {
+    console.log('Alpine.js initialized on Food & Drink page');
+});
+
+// FIX: Gunakan data attributes untuk menghindari masalah dengan special characters
+function openDetailModalFromData(element) {
+    const productData = {
+        id: element.dataset.productId,
+        name: element.dataset.productName,
+        type: element.dataset.productType,
+        price: element.dataset.productPrice,
+        image_url: element.dataset.productImage
+    };
+    
+    console.log('Opening modal for product:', productData);
+    console.log('Image URL:', productData.image_url);
+    
+    openDetailModal(productData);
+}
+
 function openDetailModal(product) {
     const modal = document.getElementById('detailModal');
     const panel = document.getElementById('modalPanel');
+    const modalImage = document.getElementById('modalImage');
+    const modalImagePlaceholder = document.getElementById('modalImagePlaceholder');
     
-    // Update content
-    document.getElementById('modalImage').src = product.image_url || 'https://via.placeholder.com/400x400/F59E0B/ffffff?text=' + encodeURIComponent(product.name);
-    document.getElementById('modalImage').alt = product.name;
-    document.getElementById('modalName').textContent = product.name;
+    if (!modal || !panel || !modalImage) {
+        console.error('Modal elements not found');
+        return;
+    }
     
-    // Type badge
-    const typeBadge = document.getElementById('modalType');
-    typeBadge.textContent = product.type.charAt(0).toUpperCase() + product.type.slice(1);
-    typeBadge.className = 'inline-block px-4 py-1.5 text-sm font-bold rounded-full ' + 
-        (product.type === 'food' ? 'bg-red-500 text-white' : 'bg-blue-500 text-white');
+    // Reset displays
+    modalImage.style.display = 'none';
+    modalImagePlaceholder.style.display = 'flex';
     
-    // Price
-    document.getElementById('modalPrice').textContent = 'Rp ' + Number(product.price).toLocaleString('id-ID');
+    // Update image
+    const imageUrl = product.image_url || '';
+    console.log('Setting image URL:', imageUrl);
+    
+    if (imageUrl && imageUrl.trim() !== '') {
+        modalImage.src = imageUrl;
+        modalImage.alt = product.name || 'Product';
+        // Image will show via onload event
+    } else {
+        console.log('No valid image URL, showing placeholder');
+    }
+    
+    // Update product name
+    const modalName = document.getElementById('modalName');
+    if (modalName) {
+        modalName.textContent = product.name || 'Product Name';
+    }
+    
+    // Update type badge
+    const modalType = document.getElementById('modalType');
+    if (modalType) {
+        const productType = product.type || 'food';
+        modalType.textContent = productType.charAt(0).toUpperCase() + productType.slice(1);
+        modalType.className = 'inline-block px-4 py-1.5 text-sm font-bold rounded-full ' + 
+            (productType === 'food' ? 'bg-red-500 text-white' : 'bg-blue-500 text-white');
+    }
+    
+    // Update price
+    const modalPrice = document.getElementById('modalPrice');
+    if (modalPrice) {
+        const price = Number(product.price) || 0;
+        modalPrice.textContent = 'Rp ' + price.toLocaleString('id-ID');
+    }
     
     // Show modal
     modal.classList.remove('hidden');
@@ -218,6 +299,8 @@ function closeDetailModal() {
     const modal = document.getElementById('detailModal');
     const panel = document.getElementById('modalPanel');
     
+    if (!modal || !panel) return;
+    
     // Slide out animation
     panel.style.transform = 'translateX(100%)';
     
@@ -229,7 +312,25 @@ function closeDetailModal() {
 
 // Close on Escape key
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeDetailModal();
+    if (e.key === 'Escape') {
+        closeDetailModal();
+    }
+});
+
+// Debug: Check if Alpine.js is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM Content Loaded');
+    console.log('Alpine available?', typeof window.Alpine !== 'undefined');
+    
+    // If Alpine not available after 1 second, log warning
+    setTimeout(() => {
+        if (typeof window.Alpine === 'undefined') {
+            console.warn('Alpine.js not loaded! Hamburger and dropdown will not work.');
+            console.warn('Check if Alpine.js is included in app.blade.php');
+        } else {
+            console.log('Alpine.js is available ✓');
+        }
+    }, 1000);
 });
 </script>
 @endpush
