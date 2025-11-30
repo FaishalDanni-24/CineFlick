@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/showtime/{showtime}/select-seats', [BookingController::class, 'selectSeats'])->name('booking.select-seats');
     Route::post('/showtime/{showtime}/booking', [BookingController::class, 'storeBooking'])->name('booking.store');
     Route::get('/booking/{booking}/add-food', [BookingController::class, 'addFood'])->name('booking.add-food');
+    Route::post('/booking/{booking}/food-drink', [BookingController::class, 'storeFoodDrink'])->name('booking.store-food-drink');
     Route::get('/booking/{booking}/review', [BookingController::class, 'review'])->name('booking.review');
     Route::post('/booking/{booking}/cancel', [BookingController::class, 'cancelBooking'])->name('booking.cancel');
 

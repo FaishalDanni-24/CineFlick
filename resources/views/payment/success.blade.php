@@ -4,57 +4,17 @@
 @section('step','payment')
 
 @section('content')
-<style>
-    @layer utilities {
-        @media print {
-            * {
-                color: black !important;
-            }
-            header {
-                @apply hidden !important;
-            }
-            nav {
-                @apply hidden !important;
-            }
-            .print\:hidden {
-                @apply hidden !important;
-            }
-            .grid {
-                @apply block !important;
-            }
-            .md\:col-span-2 > div:first-child {
-                @apply hidden !important;
-            }
-            .md\:col-span-2 {
-                @apply max-w-full !important;
-            }
-            .bg-white\/5,
-            .bg-black\/30 {
-                @apply bg-white !important;
-            }
-            .border-white\/10 {
-                @apply border-gray-400 !important;
-            }
-            .text-white\/60,
-            .text-white\/50 {
-                @apply text-black !important;
-            }
-            .text-lg,
-            .text-xl,
-            .text-sm {
-                @apply text-black !important;
-            }
-            .rounded-xl,
-            .rounded-2xl {
-                @apply break-inside-avoid border-2 border-gray-700 !important;
-            }
-            @page {
-                margin: 10mm;
-                size: auto;
-            }
-        }
-    }
-</style>
+<script>
+  function printTickets() {
+    const printArea = document.getElementById('printTickets');
+    const originalContent = document.body.innerHTML;
+    document.body.innerHTML = printArea.innerHTML;
+    window.print();
+    document.body.innerHTML = originalContent;
+    location.reload();
+  }
+</script>
+
 @php($film = $booking->showtime->film)
 @php($tickets = $booking->ticket)
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -75,7 +35,7 @@
             </div>
         </div>
 
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6" id="printTickets">
             <div class="font-semibold mb-3">Tiket Anda</div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 @forelse($tickets as $t)
@@ -100,7 +60,7 @@
 
     <div class="space-y-6 print:hidden">
         <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
-            <button onclick="window.print()" class="w-full px-4 py-2 rounded bg-red-600 text-white font-semibold">Cetak / Simpan</button>
+            <button onclick="printTickets()" class="w-full px-4 py-2 rounded bg-red-600 text-white font-semibold">Cetak / Simpan</button>
             <a href="{{ route('history.show',$booking) }}" class="mt-3 block text-center w-full px-4 py-2 rounded bg-white/10">Lihat di Riwayat</a>
         </div>
     </div>
