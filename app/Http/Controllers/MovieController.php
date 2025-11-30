@@ -3,21 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Film;
-use App\Models\Showtime;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Http\JsonResponse;
 
 class MovieController extends Controller
 {
     /**
-     * Display a listing of films with filters and pagination
+     * Display movies page with filters and pagination
      */
-    public function index(Request $request): View
+    public function index(Request $request)
     {
         // Get filter parameters
         $selectedGenre = $request->input('genre');
         $selectedRating = $request->input('rating');
-
+        
         // Get all unique genres for filter
         $genres = Film::select('genre')
             ->distinct()
@@ -25,43 +25,38 @@ class MovieController extends Controller
             ->filter()
             ->sort()
             ->values();
-
+        
         // Get 3 random films for hero slider
-        $heroFilms = Film::inRandomOrder()
-            ->take(3)
-            ->get();
-
-        // Build query for films
+        $heroFilms = Film::inRandomOrder()->take(3)->get();
+        
+        // Build query for filtered films
         $filmsQuery = Film::query();
-
-        // Filter by genre if selected
+        
+        // Apply genre filter
         if ($selectedGenre && $selectedGenre !== 'all') {
             $filmsQuery->where('genre', $selectedGenre);
         }
-
-        // Filter by rating if selected
+        
+        // Apply rating filter
         if ($selectedRating && $selectedRating !== 'all') {
-            $minRating = (float) str_replace('+', '', $selectedRating);
-            $filmsQuery->where('rating', '>=', $minRating);
+            $ratingValue = (float) str_replace('+', '', $selectedRating);
+            $filmsQuery->where('rating', '>=', $ratingValue);
         }
-
+        
         // Paginate results (12 per page)
-        $films = $filmsQuery->latest()
-            ->paginate(12)
-            ->withQueryString(); // Preserve query parameters in pagination links
-
-        // Handle AJAX requests for infinite scroll
+        $films = $filmsQuery->latest()->paginate(12);
+        
+        // If AJAX request (for infinite scroll), return only grid HTML
         if ($request->ajax()) {
-            return view('components.movies-grid-infinite', compact('films'))->render();
+            return response()->json([
+                'html' => view('components.movies-grid-infinite', compact('films'))->render(),
+                'hasMore' => $films->hasMorePages(),
+                'nextPage' => $films->currentPage() + 1
+            ]);
         }
-
-        return view('movies.index', compact(
-            'heroFilms',
-            'genres',
-            'films',
-            'selectedGenre',
-            'selectedRating'
-        ));
+        
+        // Regular request: return full page
+        return view('movies.index', compact('heroFilms', 'genres', 'films', 'selectedGenre', 'selectedRating'));
     }
 
     /**
@@ -70,6 +65,7 @@ class MovieController extends Controller
     public function show(Film $film): View
     {
         $film->load('showtime');
+        
         return view('movies.show', [
             'film' => $film,
             'showtimes' => $film->showtime,
