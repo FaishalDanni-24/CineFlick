@@ -4,7 +4,9 @@
 @section('step','payment')
 @section('content')
 @php($film=$booking->showtime->film)
-@php($grandTotal = ($booking->total_price ?? 0) + ($booking->bookingFoodDrink->sum('subtotal') ?? 0))
+@php($ticketTotal = $booking->ticket->sum('ticket_price'))
+@php($fdTotal = $booking->bookingFoodDrink->sum('subtotal'))
+@php($grandTotal = ($ticketTotal ?? 0) + ($fdTotal ?? 0))
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
     <div class="md:col-span-2 space-y-6">
         <div class="bg-white/5 border border-white/10 rounded-xl p-6">
@@ -22,7 +24,7 @@
         <div class="bg-white/5 border border-white/10 rounded-xl p-6">
             <div class="font-semibold mb-3">Ringkasan Kursi</div>
             <div class="text-sm text-white/80">Jumlah kursi: {{ $booking->ticket->count() }}</div>
-            <div class="text-sm text-white/60">Subtotal tiket: Rp {{ number_format($booking->total_price,0,',','.') }}</div>
+            <div class="text-sm text-white/60">Subtotal tiket: Rp {{ number_format($ticketTotal,0,',','.') }}</div>
         </div>
         <div class="bg-white/5 border border-white/10 rounded-xl p-6">
             <div class="font-semibold mb-3">Food & Drink</div>
