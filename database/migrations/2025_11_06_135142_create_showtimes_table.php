@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Pastikan nilai di kolom ini hanya diisi user_id dengan role admin
             $table->timestamps();
 
-            $table->unique(['start_time', 'end_time', 'studio_id']); // Gabungan kolom ini harus unik
+            $table->unique(['show_date', 'start_time', 'end_time', 'studio_id']); // Gabungan kolom ini harus unik
         });
     }
 
