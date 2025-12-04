@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Booking extends Model
 {
+    use HasFactory;
+
     // $fillable berfungsi sebagai keamanan (Mass Assignment Protection)
     protected $fillable = [
         'total_price',
@@ -14,6 +17,12 @@ class Booking extends Model
         'user_id',
         'showtime_id'
     ];
+
+    protected $casts = [
+        'booking_date' => 'datetime',
+        'total_price' => 'decimal:2',
+    ];
+
     // Relasi: Booking -> User (Many to One)
     public function user()
     {
