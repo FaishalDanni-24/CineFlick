@@ -1,7 +1,10 @@
 @extends('layouts.booking-process')
 
 @section('title','Review')
-@section('step','review')
+
+@php
+    $currentStep = 'review';
+@endphp
 
 @section('content')
 @php($film = $booking->showtime->film)
@@ -45,11 +48,26 @@
     </div>
     <div class="space-y-6">
         <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
-            <div class="flex justify-between">
+            <div class="flex justify-between mb-4">
                 <span class="font-semibold">Total</span>
-                <span class="font-bold">Rp {{ number_format($grandTotal,0,',','.') }}</span>
+                <span class="font-bold text-xl">Rp {{ number_format($grandTotal,0,',','.') }}</span>
             </div>
-            <a href="{{ route('payment.show',$booking) }}" class="mt-4 block w-full text-center px-4 py-2 rounded bg-red-600 text-white font-semibold">Bayar</a>
+            <div class="flex items-center justify-between gap-3">
+                <a href="{{ route('booking.add-food', $booking) }}" 
+                   class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-gray-700 hover:bg-gray-600 text-white font-semibold transition-all">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                    Back
+                </a>
+                <a href="{{ route('payment.show',$booking) }}" 
+                   class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold transition-all shadow-lg shadow-red-600/30">
+                    Bayar Sekarang
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
         </div>
     </div>
 </div>
