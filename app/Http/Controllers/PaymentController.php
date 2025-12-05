@@ -13,12 +13,20 @@ class PaymentController extends Controller
 {
     /**
      * Display the payment page for a booking
+     * 
+     * Validates that booking has tickets before allowing payment
      */
     public function show(Booking $booking): View
     {
         // Ensure user owns this booking
         if ($booking->user_id !== Auth::id()) {
             abort(403, 'Unauthorized access to this booking');
+        }
+
+        // Validate step: Must have tickets (seats selected)
+        if ($booking->ticket->count() === 0) {
+            return redirect()->route('booking.select-seats', $booking->showtime)
+                ->with('error', 'Silakan pilih kursi terlebih dahulu sebelum melakukan pembayaran.');
         }
 
         $booking->load(['showtime.film', 'ticket', 'bookingFoodDrink.foodDrink', 'payment']);

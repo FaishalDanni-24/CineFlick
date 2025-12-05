@@ -1,7 +1,11 @@
 @extends('layouts.booking-process')
 
 @section('title','Pilih Kursi')
-@section('step','select')
+
+@php
+    $currentStep = 'select';
+@endphp
+
 @section('content')
 @php($film = $showtime->film)
 @php($rows = $allSeats->groupBy('seat_row'))
@@ -56,9 +60,21 @@
 
                 <div id="selectedInputs"></div>
 
-                <div class="flex items-center justify-between">
-                    <button type="button" id="clearBtn" class="px-6 py-2 rounded-full bg-red-600 text-white font-semibold">Delete</button>
-                    <button type="submit" id="nextBtn" class="px-6 py-2 rounded-full bg-green-600 text-white font-semibold">Next</button>
+                <div class="mt-6 flex items-center justify-between gap-3 relative z-10">
+                    <button type="button" id="clearBtn" 
+                            class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-gray-700 hover:bg-gray-600 text-white font-semibold transition-all cursor-pointer">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                        </svg>
+                        Clear
+                    </button>
+                    <button type="submit" id="nextBtn" 
+                            class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold transition-all shadow-lg shadow-red-600/30 cursor-pointer">
+                        Next
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
                 </div>
             </form>
         </div>
@@ -98,15 +114,23 @@
     const seatCount = document.getElementById('seatCount');
     const seatPrice = document.getElementById('seatPrice');
     const inputs = document.getElementById('selectedInputs');
+    const clearBtn = document.getElementById('clearBtn');
+    const seatForm = document.getElementById('seatForm');
+
+    console.log('Seat selection initialized');
+    console.log('Booked seats:', booked);
+    console.log('Price per seat:', pricePerSeat);
+
     function rp(n){
         return 'Rp ' + Number(n).toLocaleString('id-ID');
     }
+    
     function render(){
         seatBadges.innerHTML = '';
         inputs.innerHTML = '';
         selected.forEach((label,id)=>{
             const b = document.createElement('div');
-            b.className = 'px-3 py-1 rounded bg-red-600 text-white font-bold';
+            b.className = 'px-3 py-1 rounded bg-red-600 text-white font-bold text-sm';
             b.textContent = label;
             seatBadges.appendChild(b);
             const i = document.createElement('input');
@@ -117,7 +141,9 @@
         });
         seatCount.textContent = selected.size;
         seatPrice.textContent = rp(selected.size * pricePerSeat);
+        console.log('Rendered. Selected seats:', selected.size);
     }
+    
     document.querySelectorAll('.seat').forEach(el=>{
         if(el.disabled) return;
         el.addEventListener('click',()=>{
@@ -137,17 +163,38 @@
             render();
         });
     });
-    document.getElementById('clearBtn').addEventListener('click',()=>{
-        selected.clear();
-        document.querySelectorAll('.seat').forEach(el=>{
-            if(!booked.has(Number(el.dataset.id))){
-                el.classList.remove('ring-2','ring-white');
-                el.classList.remove('bg-green-400');
-                el.classList.add('bg-green-600');
-            }
+    
+    // Clear button functionality
+    if (clearBtn) {
+        clearBtn.addEventListener('click',(e)=>{
+            e.preventDefault();
+            console.log('Clear button clicked');
+            selected.clear();
+            document.querySelectorAll('.seat').forEach(el=>{
+                if(!booked.has(Number(el.dataset.id))){
+                    el.classList.remove('ring-2','ring-white');
+                    el.classList.remove('bg-green-400');
+                    el.classList.add('bg-green-600');
+                }
+            });
+            render();
         });
-        render();
-    });
+    }
+
+    // Form validation before submit
+    if (seatForm) {
+        seatForm.addEventListener('submit', (e) => {
+            console.log('Form submit triggered. Selected:', selected.size);
+            if (selected.size === 0) {
+                e.preventDefault();
+                alert('⚠️ Silakan pilih minimal 1 kursi sebelum melanjutkan!');
+                return false;
+            }
+            console.log('Form submitting with', selected.size, 'seats');
+        });
+    }
+
+    // Initial render
     render();
 </script>
 @endsection

@@ -1,7 +1,10 @@
 @extends('layouts.booking-process')
 
 @section('title','Tambah F&B')
-@section('step','food')
+
+@php
+    $currentStep = 'food';
+@endphp
 
 @section('content')
 @php($film = $booking->showtime->film)
@@ -57,9 +60,27 @@
 
     <div class="space-y-6">
         <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
-            <div class="flex items-center justify-between gap-2">
-                <a href="{{ route('booking.select-seats', $booking->showtime) }}" class="px-6 py-2 rounded-full bg-gray-600 text-white font-semibold">Back</a>
-                <button type="submit" form="food-selection-form" class="px-6 py-2 rounded-full bg-green-600 text-white font-semibold">Next</button>
+            <div class="flex items-center justify-between gap-3">
+                <a href="{{ route('booking.select-seats', $booking->showtime) }}" 
+                   class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-gray-700 hover:bg-gray-600 text-white font-semibold transition-all">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                    Back
+                </a>
+                <div class="flex gap-2">
+                    <a href="{{ route('booking.review', $booking) }}" 
+                       class="px-6 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-semibold transition-all">
+                        Skip
+                    </a>
+                    <button type="submit" form="food-selection-form" 
+                            class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold transition-all shadow-lg shadow-red-600/30">
+                        Next
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     </div>

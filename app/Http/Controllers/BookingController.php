@@ -74,12 +74,20 @@ class BookingController extends Controller
 
     /**
      * Display page to add food and drinks to booking
+     * 
+     * Validates that booking exists and has tickets before allowing access
      */
     public function addFood(Booking $booking): View
     {
         // Ensure user owns this booking
         if ($booking->user_id !== Auth::id()) {
             abort(403, 'Unauthorized access to this booking');
+        }
+
+        // Validate step: Must have tickets (meaning seats were selected)
+        if ($booking->ticket->count() === 0) {
+            return redirect()->route('booking.select-seats', $booking->showtime)
+                ->with('error', 'Silakan pilih kursi terlebih dahulu.');
         }
 
         $booking->load(['showtime.film', 'ticket']);
@@ -92,12 +100,20 @@ class BookingController extends Controller
     }
     /**
      * Store food and drinks to the booking
+     * 
+     * Validates that booking exists and has tickets
      */
     public function storeFoodDrink(Request $request, Booking $booking)
     {
         // Ensure user owns this booking
         if ($booking->user_id !== Auth::id()) {
             abort(403, 'Unauthorized access to this booking');
+        }
+
+        // Validate step: Must have tickets
+        if ($booking->ticket->count() === 0) {
+            return redirect()->route('booking.select-seats', $booking->showtime)
+                ->with('error', 'Silakan pilih kursi terlebih dahulu.');
         }
 
         $validated = $request->validate([
@@ -140,12 +156,20 @@ class BookingController extends Controller
 
     /**
      * Display the booking summary/review page before payment
+     * 
+     * Validates that booking has tickets before allowing access
      */
     public function review(Booking $booking): View
     {
         // Ensure user owns this booking
         if ($booking->user_id !== Auth::id()) {
             abort(403, 'Unauthorized access to this booking');
+        }
+
+        // Validate step: Must have tickets (seats selected)
+        if ($booking->ticket->count() === 0) {
+            return redirect()->route('booking.select-seats', $booking->showtime)
+                ->with('error', 'Silakan pilih kursi terlebih dahulu.');
         }
 
         $booking->load(['showtime.film', 'showtime.studio', 'ticket.seat', 'bookingFoodDrink.foodDrink']);
