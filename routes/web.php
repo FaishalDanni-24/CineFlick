@@ -17,7 +17,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // Dashboard (requires authentication and email verification)
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 // Movies page (public)
 Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
