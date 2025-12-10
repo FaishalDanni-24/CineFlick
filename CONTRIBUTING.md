@@ -46,46 +46,29 @@ php artisan key:generate
 ```
 4. Buat data (php artisan serve bisa diskip kalau website udah bisa diakses dari laragon)
 ```bash
-php artisan migrate:fresh --seed # Jika ditanya seperti ini, Database cineflick_db does not exist. Do you want to create it? pilih yes
-npm run dev # Menjalankan vite untuk frontend
+php artisan migrate # Jika ditanya seperti ini, Database cineflick_db does not exist. Do you want to create it? pilih yes
+php artisan db:seed
+npm run dev # Menjalankan vite untuk frontend (Jika lagi developing)
+npm run build # Membuat folder build di public (Untuk Hosting)
 php artisan serve
 ```
-5. Setup layanan mail
-Tahap ini diperlukan untuk fitur email seperti (Recovery dari Forgot Password, Verifikasi Email, dll).<br>
-**Pastikan Mailpit di laragon sudah jalan.**<br>
-Setelah instalasi, buka file ".env" dan pastikan config di ".env" anda dengan nilai berikut:
-```txt
-MAIL_MAILER=smtp
-MAIL_SCHEME=null
-MAIL_HOST=localhost # 127.0.0.1
-MAIL_PORT=1025 # Sesuaikan dengan port yang ditampilkan di laragon
-MAIL_USERNAME=null
-MAIL_PASSWORD=null
-MAIL_FROM_ADDRESS="cineflick@testmail.com"
-MAIL_FROM_NAME="${APP_NAME}"
-```
-6. Setup file ".env"
+5. Setup file ".env"
 Di file ".env", selain di bagian mail (tahap 6). Pastikan nilainya yang ada di file seperti ini:
 ```txt
 APP_URL=https://cineflick.test # Sesuaikan dengan URL website
 
 DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
+DB_HOST=127.0.0.1 # Sesuaikan dengan alamat host database
+DB_PORT=3306 # Sesuaikan port database
 DB_DATABASE=cineflick_db
-DB_USERNAME=root
+DB_USERNAME=root # Sesuaikan dengan username ke database
 DB_PASSWORD= # Jika database mysql ada password, masukkan passwordnya
 ```
-8. Lalu jalankan kode ini di terminal laragon, untuk membersihkan cache:
+6. Lalu jalankan kode ini di terminal laragon, untuk membersihkan semua cache:
 ```bash
-php artisan config:clear
-php artisan cache:clear
-php artisan route:clear
-php artisan view:clear
-# Atau (Bersihkan semua cache)
 php artisan optimize:clear
 ```
-9. Membuat symbolic link folder 'storage/app/public'
+7. Membuat symbolic link folder 'storage/app/public' untuk data gambar poster dan makanan & minuman
 ```bash
 php artisan storage:link
 ```

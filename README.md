@@ -55,46 +55,29 @@ php artisan key:generate
 ```
 4. Buat data (php artisan serve bisa diskip kalau website udah bisa diakses dari laragon)
 ```bash
-php artisan migrate:fresh --seed # Jika ditanya seperti ini, Database cineflick_db does not exist. Do you want to create it? pilih yes
-npm run dev # Menjalankan vite untuk frontend
+php artisan migrate # Jika ditanya seperti ini, Database cineflick_db does not exist. Do you want to create it? pilih yes
+php artisan db:seed
+npm run dev # Menjalankan vite untuk frontend (Jika lagi developing)
+npm run build # Membuat folder build di public (Untuk Hosting)
 php artisan serve
 ```
-5. Setup layanan mail
-Tahap ini diperlukan untuk fitur email seperti (Recovery dari Forgot Password, Verifikasi Email, dll).<br>
-**Pastikan Mailpit di laragon sudah jalan.**<br>
-Setelah instalasi, buka file ".env" dan pastikan config di ".env" anda dengan nilai berikut:
-```txt
-MAIL_MAILER=smtp
-MAIL_SCHEME=null
-MAIL_HOST=localhost # 127.0.0.1
-MAIL_PORT=1025 # Sesuaikan dengan port yang ditampilkan di laragon
-MAIL_USERNAME=null
-MAIL_PASSWORD=null
-MAIL_FROM_ADDRESS="cineflick@testmail.com"
-MAIL_FROM_NAME="${APP_NAME}"
-```
-6. Setup file ".env"
+5. Setup file ".env"
 Di file ".env", selain di bagian mail (tahap 6). Pastikan nilainya yang ada di file seperti ini:
 ```txt
 APP_URL=https://cineflick.test # Sesuaikan dengan URL website
 
 DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
+DB_HOST=127.0.0.1 # Sesuaikan dengan alamat host database
+DB_PORT=3306 # Sesuaikan port database
 DB_DATABASE=cineflick_db
-DB_USERNAME=root
+DB_USERNAME=root # Sesuaikan dengan username ke database
 DB_PASSWORD= # Jika database mysql ada password, masukkan passwordnya
 ```
-8. Lalu jalankan kode ini di terminal laragon, untuk membersihkan cache:
+6. Lalu jalankan kode ini di terminal laragon, untuk membersihkan semua cache:
 ```bash
-php artisan config:clear
-php artisan cache:clear
-php artisan route:clear
-php artisan view:clear
-# Atau (Bersihkan semua cache)
 php artisan optimize:clear
 ```
-9. Membuat symbolic link folder 'storage/app/public'
+7. Membuat symbolic link folder 'storage/app/public' untuk data gambar poster dan makanan & minuman
 ```bash
 php artisan storage:link
 ```
@@ -103,12 +86,11 @@ php artisan storage:link
 Berikut adalah catatan yang bisa dicek untuk informasi lebih lanjut dari proyek:
 
 1. Pastikan file ".env" tidak diupload (Cek di isi file ".gitignore" di folder awal proyek dengan tulisan ".env, pastikan ada tulisannya) karena ada key yang gak boleh dishare, untuk file ".env.example" boleh diupload karena hanya contoh yang tidak ada key.
-2. Gunakan Laragon untuk menghost website secara lokal.
+2. Gunakan Laragon untuk menghost website secara lokal selama development.
 3. Database MySQL yang digunakan tidak sama setiap sistem individu.
-4. Jalankan perintah 'npm run dev dan php artisan serve' setiap menjalankan website **(WAJIB)**.
+4. Jalankan perintah 'npm run dev dan php artisan serve' setiap menjalankan website lokal **(WAJIB)**.
 5. Frontend menggunakan npm (Vite) dan backend menggunakan composer (Laravel).
-6. **Mailpit** digunakan untuk testing sistem pengiriman email secara lokal, untuk mengaksesnya gunakan **'localhost:8025'**. Fitur akan disesuaikan di waktu mendatang.
-7. Jika ada update database (terutama struktur), jalankan perintah di bawah:
+6. Jika ada update database (terutama struktur), jalankan perintah di bawah:
 ```bash
 # Membuat ulang database cineflick_db dari nol dan mengisi dengan nilai default dari seeders (Catatan: Session dan user akan hilang!)
 php artisan migrate:fresh --seed
@@ -116,9 +98,9 @@ php artisan migrate:fresh --seed
 php artisan migrate
 php artisan db:seed
 ```
-8. **Jangan mengubah file ".env.example"**, file ini adalah file contoh .env yang dishare ke repo.
-9. Jika ada kendala saat baru mulai mengerjakan (belum ada melakukan coding), silahkan coba install ulang.
-10. Jangan lupa untuk menjalankan git pull origin main setiap sebelum dan sesudah mengerjakan kode agar progres  proyek di sistem masing-masing tetap terupdate.
+7. **Jangan mengubah file ".env.example"**, file ini adalah file contoh .env yang dishare ke repo.
+8. Jika ada kendala saat baru mulai mengerjakan (belum ada melakukan coding), silahkan coba install ulang.
+9. Jangan lupa untuk menjalankan git pull origin main setiap sebelum dan sesudah mengerjakan kode agar progres  proyek di sistem masing-masing tetap terupdate.
 
 ## Kontak
 Mohon maaf jika ada kesalahan atau kekurangan. Jika ada yang perlu dikoreksi atau ditambah di file "README.md" dan "CONTRIBUTING.md" tolong berikan info melalui WA ketua.
@@ -126,5 +108,7 @@ Mohon maaf jika ada kesalahan atau kekurangan. Jika ada yang perlu dikoreksi ata
 ## Tambahan
 Terima kasih kepada semua anggota yang telah berkontribusi. Semoga proyek dapat dikerjakan dengan baik, amin.<br>
 Berikut adalah file untuk melihat referensi progres proyek:<br>
-<a href="https://docs.google.com/document/d/1jCS7-8fVJhjv4X_mvjQG8Z2XSomctwMPMPOBasBEF2Q/edit?usp=sharing">Fitur CineFlick</a>
-
+<a href="https://docs.google.com/document/d/1jCS7-8fVJhjv4X_mvjQG8Z2XSomctwMPMPOBasBEF2Q/edit?usp=sharing">Progres CineFlick</a><br>
+Dan berikut link untuk file data gambar di website, agar bisa tampil:<br>
+<a href="https://drive.google.com/drive/folders/1RyHxmVgmkuFqpJSpmLI_YX1n-yLJAjSO">Proyek CineFlick</a><br>
+Download folder poster dan FoodDrink lalu copy ke folder storage/app/public<br>
