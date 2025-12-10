@@ -67,7 +67,7 @@
                         <div class="space-y-2 text-sm text-gray-300">
                             <p><span class="text-gray-400">Genre:</span> {{ $booking->showtime->film->genre ?? 'N/A' }}</p>
                             <p><span class="text-gray-400">Rating:</span> {{ $booking->showtime->film->rating ?? 'N/A' }}</p>
-                            <p><span class="text-gray-400">Duration:</span> {{ $booking->showtime->film->duration ?? 0 }} min</p>
+                            <p><span class="text-gray-400">Duration:</span> {{ $booking->showtime->film->duration_mins ?? 0 }} min</p>
                         </div>
                     </div>
                 </div>
@@ -113,12 +113,12 @@
                         @foreach($booking->ticket as $ticket)
                             <div class="flex items-center justify-between py-3 border-b border-slate-700 last:border-0 text-gray-300">
                                 <span>Seat {{ $ticket->seat->seat_number }}</span>
-                                <span class="font-semibold">Rp {{ number_format($ticket->price, 0, ',', '.') }}</span>
+                                <span class="font-semibold">Rp {{ number_format($ticket->ticket_price, 0, ',', '.') }}</span>
                             </div>
                         @endforeach
                         <div class="flex items-center justify-between pt-4 mt-4 border-t border-slate-600">
                             <span class="font-semibold text-white">Subtotal ({{ $booking->ticket->count() }} tickets)</span>
-                            <span class="text-xl font-bold text-red-500">Rp {{ number_format($booking->ticket->sum('price'), 0, ',', '.') }}</span>
+                            <span class="text-xl font-bold text-red-500">Rp {{ number_format($booking->ticket->sum('ticket_price'), 0, ',', '.') }}</span>
                         </div>
                     </div>
 
