@@ -9,10 +9,14 @@ use App\Http\Controllers\FoodDrinkPaymentController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 // Homepage
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Search API (public - accessible for all users)
+Route::get('/api/search', [SearchController::class, 'search'])->name('search');
 
 // Dashboard (requires authentication and email verification)
 Route::get('/dashboard', function () {
