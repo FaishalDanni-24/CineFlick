@@ -3,23 +3,30 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Seat extends Model
 {
-    // Identitas Kursi
-    protected $fillable =[
+    protected $fillable = [
+        'studio_id',
         'seat_row',
         'seat_number',
-        'studio_id'
     ];
 
-    // Relasi: Kursi ini ada di dalam satu Studio
-    public function studio(){
+    // Accessor buat gabung seat_row + seat_number jadi "A3", "B5", dll
+    public function getSeatNumberAttribute()
+    {
+        return $this->attributes['seat_row'] . $this->attributes['seat_number'];
+    }
+
+    public function studio(): BelongsTo
+    {
         return $this->belongsTo(Studio::class);
     }
 
-    // Relasi: Kursi ini bisa punya banyak riwayat Tiket
-    public function ticket(){
+    public function ticket(): HasMany
+    {
         return $this->hasMany(Ticket::class);
     }
 }
