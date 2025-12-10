@@ -7,6 +7,8 @@
     <title>{{ config('app.name', 'CineFlick') }}</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 </head>
 
 <body class="relative min-h-screen bg-cover bg-center bg-no-repeat"
