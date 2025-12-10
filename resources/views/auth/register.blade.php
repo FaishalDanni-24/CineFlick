@@ -12,7 +12,7 @@
         .cine-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.75); /* ubah kalo mau lebih gelap */
+            background: rgba(0, 0, 0, 0.13); /* ubah kalo mau lebih gelap */
             z-index: -1;
         }
     </style>

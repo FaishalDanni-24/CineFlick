@@ -41,23 +41,19 @@
                     <label for="remember_me" class="text-white text-sm">Ingat Saya</label>
                 </div>
 
-                <div class="flex justify-between items-center text-sm">
-                    <a href="{{ route('password.request') }}" class="text-gray-300 hover:text-white">
-                        Lupa Password?
-                    </a>
+                <!-- Tombol Masuk -->
+<button
+    class="w-full bg-white text-red-600 border border-red-600 hover:bg-red-600 hover:text-white 
+           py-2 rounded-lg transition-all font-semibold">
+    Masuk
+</button>
 
-                    <a href="{{ route('register') }}" class="text-blue-400 hover:text-blue-300">
-                        Daftar
-                    </a>
-                </div>
-
-                <!-- Button -->
-                <button
-                    class="w-full mt-6 bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-all font-semibold">
-                    Masuk
-                </button>
-            </form>
-        </div>
-
-    </div>
+<!-- Tombol Daftar -->
+<div class="mt-4">
+    <a href="{{ route('register') }}"
+       class="block w-full text-center bg-white text-red-600 border border-red-600 
+              hover:bg-red-600 hover:text-white py-2 rounded-lg transition-all font-semibold">
+        Daftar
+    </a>
+</div>
 </x-guest-layout>
