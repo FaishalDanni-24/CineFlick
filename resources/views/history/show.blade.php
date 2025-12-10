@@ -156,7 +156,7 @@
                         <div class="flex items-center justify-between">
                             <span class="text-3xl font-bold text-white">Rp {{ number_format($booking->total_price, 0, ',', '.') }}</span>
                             <span class="text-sm text-gray-300">
-                                {{ optional($booking->payment->first())->payment_method ?? 'N/A' }}
+                                {{ optional($booking->payment->first())->method ?? 'N/A' }}
                             </span>
                         </div>
                     </div>
