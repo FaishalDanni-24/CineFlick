@@ -4,7 +4,7 @@
     $film = $booking->showtime->film ?? null;
     $studio = $booking->showtime->studio ?? null;
     $showtime = $booking->showtime ?? null;
-    $seats = $booking->ticket->pluck('seat.seat_number')->toArray();
+    $seats = $booking->ticket->pluck('seat.seat_position')->toArray();
     $hasFoodDrink = $booking->bookingFoodDrink->count() > 0;
     
     $statusStyles = [

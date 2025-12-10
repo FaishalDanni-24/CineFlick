@@ -15,7 +15,7 @@ class Seat extends Model
     ];
 
     // Accessor buat gabung seat_row + seat_number jadi "A3", "B5", dll
-    public function getSeatNumberAttribute()
+    public function getSeatPositionAttribute()
     {
         return $this->attributes['seat_row'] . $this->attributes['seat_number'];
     }

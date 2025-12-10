@@ -97,7 +97,7 @@
                             </div>
                             <div>
                                 <p class="text-sm text-gray-400 mb-1">Seats</p>
-                                <p class="font-semibold">{{ $booking->ticket->pluck('seat.seat_number')->implode(', ') }}</p>
+                                <p class="font-semibold">{{ $booking->ticket->pluck('seat.seat_position')->implode(', ') }}</p>
                             </div>
                         </div>
                     </div>
