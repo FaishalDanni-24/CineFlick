@@ -67,7 +67,7 @@
                                 <img src="{{ $item->image_url }}" 
                                      alt="{{ $item->name }}"
                                      class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                                     onerror="this.onerror=null; this.src='https://via.placeholder.com/400x400/F59E0B/ffffff?text={{ urlencode($item->name) }}';">
+                                     onerror="this.onerror=null; this.src='https://placehold.co/400x400/F59E0B/ffffff?text={{ urlencode($item->name) }}';">
                             @else
                                 <div class="w-full h-full flex items-center justify-center">
                                     <svg class="w-20 h-20 text-white/50" fill="currentColor" viewBox="0 0 20 20">

@@ -23,7 +23,7 @@
                     src="{{ asset('storage/' . $film->poster_path) }}" 
                     alt="{{ $film->title }}"
                     class="w-full h-full object-cover"
-                    onerror="this.src='{{ asset('images/bg.png') }}'"
+                    onerror="this.src='{{ asset('images/bg.jpeg') }}'"
                 >
                 <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent"></div>
             </div>

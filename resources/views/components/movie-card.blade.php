@@ -5,7 +5,7 @@
             src="{{ asset('storage/' . $film->poster_path) }}" 
             alt="{{ $film->title }}"
             class="w-full h-full object-cover transform group-hover:scale-110 transition duration-300"
-            onerror="this.src='{{ asset('images/bg.png') }}'"
+            onerror="this.src='{{ asset('images/bg.jpeg') }}'"
         >
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-300">
             <div class="absolute bottom-0 p-4">

@@ -34,7 +34,7 @@ Fitur:
             {{-- Background Image with Overlay --}}
             <div class="absolute inset-0">
                 <img 
-                    src="{{ $film->poster_url ?? 'https://via.placeholder.com/1920x1080?text=No+Image' }}" 
+                    src="{{ $film->poster_url ?? 'https://placehold.co/1920x1080?text=No+Image' }}" 
                     alt="{{ $film->title }}"
                     class="w-full h-full object-cover"
                 >

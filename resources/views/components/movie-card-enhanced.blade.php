@@ -18,7 +18,7 @@ Features:
     {{-- Poster Image --}}
     <div class="aspect-[2/3] overflow-hidden bg-gray-700">
         <img 
-            src="{{ $film->poster_url ?? 'https://via.placeholder.com/300x450?text=No+Poster' }}" 
+            src="{{ $film->poster_url ?? 'https://placehold.co/300x450?text=No+Poster' }}" 
             alt="{{ $film->title }}"
             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
             loading="lazy"
